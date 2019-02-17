@@ -5,24 +5,24 @@ import defs.objects.flyer.Flyer;
 import defs.objects.munition.Bullet;
 import main.Main;
 
-public class PlainGun implements IShooting{
+public class PlainGun implements IShooting {
 
 	private Flyer flyer;
 	private int Verbrauch;
-	
+
 	public PlainGun(Flyer fly) {
 		setFlyer(fly);
 		setVerbrauch(2);
 	}
-	
+
 	@Override
 	public void shoot(Main main) {
-		main.add(new Bullet(main,this.getFlyer().getX(),
-				this.getFlyer().getY()-20,(int)this.getFlyer().getSpeedX(),20));
+		main.add(new Bullet(main, this.getFlyer().getX(), this.getFlyer().getY() - 20,
+				(int) this.getFlyer().getSpeedX(), 20));
 		main.getPlainGunSound().trigger();
-		getFlyer().setMuni(getFlyer().getMuni()-getVerbrauch());
+		getFlyer().setMuni(getFlyer().getMuni() - getVerbrauch());
 	}
-	
+
 	public Flyer getFlyer() {
 		return flyer;
 	}
@@ -39,6 +39,5 @@ public class PlainGun implements IShooting{
 	public void setVerbrauch(int verbrauch) {
 		Verbrauch = verbrauch;
 	}
-
 
 }

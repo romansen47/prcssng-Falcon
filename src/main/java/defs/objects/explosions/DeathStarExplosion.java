@@ -6,19 +6,20 @@ import defs.interfaces.IDrawable;
 import defs.objects.flyer.DarthVaderFlyer;
 import main.Main;
 
-public class DeathStarExplosion extends FinalExplosion{
-	
+public class DeathStarExplosion extends FinalExplosion {
+
 	private Random r;
+
 	public DeathStarExplosion(Main main, int x, int y) {
 		super(main, x, y);
 		setSize(150);
 		setR(new Random());
 	}
-	
+
 	@Override
 	public void draw(Main main) {
-		for (IDrawable obj:main.getObjects()) {
-			if ( obj != main.getHanSolo() ) {
+		for (IDrawable obj : main.getObjects()) {
+			if (obj != main.getHanSolo()) {
 				main.remove(obj);
 			}
 		}
