@@ -1,0 +1,96 @@
+package defs.objects.munition;
+
+import defs.interfaces.IDrawable;
+import defs.objects.explosions.Explosion;
+import main.Main;
+
+public class Laser extends Bullet{
+
+	final int frames;
+	IDrawable NearestObject;
+	public int Schaden=30;
+	public Laser(Main main,int x,int y) {
+		super(main,x,y,0,0);
+		this.frames=main.getFrameCount();
+		NearestObject=getNearestObject(main);
+	}
+	
+	private IDrawable getNearestObject(Main main) {
+		double dist=main.Height;
+		IDrawable ans = null;
+		for (IDrawable obj:main.getObjects()) {
+			if (dist>0 &&
+				!(obj instanceof Bullet) &&
+				!(obj instanceof Explosion) &&
+				obj !=(IDrawable)this && 
+				obj.getY()<main.getHanSolo().getY() && 
+				(main.getHanSolo().getY()-obj.getY())<dist &&
+				getX()>obj.getX()-(0.5*obj.getSize()) &&
+				getX()<obj.getX()+(0.5*obj.getSize())
+					) {
+				ans=obj;
+				dist=main.getHanSolo().getY()-obj.getY();
+			}
+		}
+		return ans;
+	}
+	
+	@Override
+	public IDrawable checkForImpact(IDrawable obj) {
+		if (obj == NearestObject) {
+			return obj;
+		}
+		return null;
+	}
+	
+	@Override
+	public void draw(Main main) {
+		if (main.getFrameCount()-frames>3) {
+			main.remove(this);
+			try {
+				this.finalize();
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			main.stroke(255,30,30);
+			if (NearestObject!=null) {
+				main.line(getX(),getY()-10,getX(),NearestObject.getY()+NearestObject.getSize());
+			}
+			else {
+				main.line(getX(),getY()-10,getX(),0);
+			}
+			main.stroke(0);
+			main.remove(this);
+		}
+	}
+
+	@Override
+	public void move(Main main) {
+		setY(getY()-getSpeedY());
+		if (getY()<0 || getY()>main.Height) {
+			main.remove(this);
+			try {
+				this.finalize();
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			if (getSpeedY()>0) {
+				Main.getStatistic().setMissed(Main.getStatistic().getMissed()+1);
+			}
+		}
+		for (IDrawable obj:main.getObjects()) {
+			if ( obj!=(IDrawable)this && checkForImpact(obj)!=null ) {
+				obj.gotHit(main,getSchaden());
+				main.add(new Explosion(main, this.getX(),obj.getY()+obj.getSize()));
+				main.remove(this);
+				try {
+					this.finalize();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			};
+		}
+	} 
+}
