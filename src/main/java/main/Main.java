@@ -22,7 +22,7 @@ import defs.objects.yoda.Yoda;
 import processing.core.PImage;
 import processing.core.PShape;
 import processing.event.MouseEvent;
-import processingTemplate.Gui;
+import processing.template.Gui;
 import temperature.Ball;	
 
 public class Main extends Gui{

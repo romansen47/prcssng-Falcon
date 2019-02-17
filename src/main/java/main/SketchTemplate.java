@@ -1,6 +1,6 @@
 package main;
 
-import processingTemplate.Gui;
+import processing.template.Gui;
 
 public class SketchTemplate extends Gui{
 	
