@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project MilleniumFalcon">    
+<!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/target/falcon_run.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="main.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+	    <fileset dir="${dir.jarfile}/target/classes"/>
+            <zipfileset excludes="META-INF/*.SF" src="target/falcon-1.0.0-snapshot-jar-with-dependencies.jar"/>
+        </jar>
+    </target>
+</project>

@@ -136,6 +136,8 @@ public class Main extends Gui {
 			prefix = "C:/Temp/data/";
 		}
 
+		prefix="";
+		
 		BackGround = loadImage(prefix + "space.jpg");
 
 		Enemies = new EnemyFlyer[0];
@@ -279,12 +281,12 @@ public class Main extends Gui {
 	public void drawInformation() {
 		fill(255 * (100 - ((HanSolo) getHanSolo()).getHealth()) / (float)((HanSolo) getHanSolo()).getMaxHealth(),
 				255 * ((HanSolo) getHanSolo()).getHealth() / (float)((HanSolo) getHanSolo()).getMaxHealth(), 0);
-		rect(30, 30, (this.Width / (double)3) * ((HanSolo) getHanSolo()).getHealth() / (float)((HanSolo) getHanSolo()).getMaxHealth(),
+		rect(30, 30, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getHealth() / (float)((HanSolo) getHanSolo()).getMaxHealth(),
 				30);
 		shape(heart, 40, 30, 30, 30);
 
 		fill(0, 0, 255);
-		rect(30, 80, (this.Width / (double)3) * ((HanSolo) getHanSolo()).getMuni() / (float)((HanSolo) getHanSolo()).getMaxMuni(), 30);
+		rect(30, 80, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getMuni() / (float)((HanSolo) getHanSolo()).getMaxMuni(), 30);
 		shape(muni, 40, 80, 30, 30);
 
 		fill(0, 255, 255);
