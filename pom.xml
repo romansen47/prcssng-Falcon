@@ -6,8 +6,14 @@
 	<groupId>prcssng</groupId>
 	<artifactId>falcon</artifactId>
 	<version>1.0.0-snapshot</version>
-	<name>prcssng-falcon</name>
+	<name>falcon</name>
 	<packaging>jar</packaging>
+	
+    <parent>
+      <groupId>prcssng</groupId>
+      <artifactId>build</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -90,14 +96,6 @@
 	        </executions>
 	      </plugin>
 	  </plugins>
-	  <resources>
-	     <resource>
-	       <directory>data</directory>
-	       <includes>
-	       	<include>*.*</include>      	
-	       </includes>
-	     </resource>
-	   </resources>	
   	</build>
 
 </project>

@@ -136,7 +136,7 @@ public class Main extends Gui {
 			prefix = "C:/Temp/data/";
 		}
 
-		prefix="";
+		prefix="data/";
 		
 		BackGround = loadImage(prefix + "space.jpg");
 
