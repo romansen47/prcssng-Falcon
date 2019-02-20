@@ -153,14 +153,27 @@ public class Main extends Gui {
 		setYoda(loadShape(prefix + "yoda.svg"));
 		setDarth(loadShape(prefix + "vader.svg"));
 
-		setPlayer(mn.loadSample(sketchPath(prefix + "Theme.mp3")));
-		setPlainGunSound(mn.loadSample(sketchPath(prefix + "laser.mp3")));
-		setExplosionSound(mn.loadSample(sketchPath(prefix + "explosion.mp3")));
-		setChewBacca(mn.loadSample(sketchPath(prefix + "chewbacca.wav")));
-		setHan(mn.loadSample(sketchPath(prefix + "han.mp3")));
-		setVader(mn.loadSample(sketchPath(prefix + "Vader.mp3")));
-		setYodaLaughter(mn.loadSample(sketchPath(prefix + "YodaLaughter.mp3")));
-
+		prefix="";
+		try {
+			setPlainGunSound(mn.loadSample(sketchPath(prefix + "laser.mp3")));
+			setExplosionSound(mn.loadSample(sketchPath(prefix + "explosion.mp3")));
+			setChewBacca(mn.loadSample(sketchPath(prefix + "chewbacca.wav")));
+			setHan(mn.loadSample(sketchPath(prefix + "han.mp3")));
+			setVader(mn.loadSample(sketchPath(prefix + "Vader.mp3")));
+			setYodaLaughter(mn.loadSample(sketchPath(prefix + "YodaLaughter.mp3")));
+			setPlayer(mn.loadSample(sketchPath(prefix + "Theme.mp3")));
+		}catch(NullPointerException npe) {
+			System.out.println("falscher Ordner!");
+		}finally {
+			prefix="./data/";
+			setPlainGunSound(mn.loadSample(sketchPath(prefix + "laser.mp3")));
+			setExplosionSound(mn.loadSample(sketchPath(prefix + "explosion.mp3")));
+			setChewBacca(mn.loadSample(sketchPath(prefix + "chewbacca.wav")));
+			setHan(mn.loadSample(sketchPath(prefix + "han.mp3")));
+			setVader(mn.loadSample(sketchPath(prefix + "Vader.mp3")));
+			setYodaLaughter(mn.loadSample(sketchPath(prefix + "YodaLaughter.mp3")));
+			setPlayer(mn.loadSample(sketchPath(prefix + "Theme.mp3")));
+		}
 		setObjects(new IDrawable[0]);
 		setHanSolo(new HanSolo(this));
 		add(getHanSolo());

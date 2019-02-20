@@ -94,13 +94,7 @@
 	     <resource>
 	       <directory>data</directory>
 	       <includes>
-	       	<include>*.png</include>
-	       	<include>*.svg</include>
-	       	<include>*.mp3</include>
-	       	<include>*.ppm</include>
-	       	<include>*.jpeg</include>
-	       	<include>*.jpg</include>
-	       	<include>*.wav</include>      	
+	       	<include>*.*</include>      	
 	       </includes>
 	     </resource>
 	   </resources>	
