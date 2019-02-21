@@ -4,7 +4,7 @@ import defs.objects.flyer.HanSolo;
 import defs.objects.guns.DoubleLaserGun;
 import main.Main;
 
-public class DoubleLaserGunBenefit extends LaserGunBenefit {
+public class DoubleLaserGunBenefit extends DoublePlainGunBenefit {
 
 	public DoubleLaserGunBenefit(Main main, int x, int y, int size, int health) {
 		super(main, x, y, size, health);
