@@ -27,15 +27,19 @@ public class Explosion implements IDrawable {
 					(int) (0.05 * Math.sqrt(getFrames() / expSize * (main.getFrameCount() - getFrames()) / expSize)
 							* getSize()));
 		} else {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		}
 	}
 
+	public void selfDestroy(Main main) {
+		main.remove(this);
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void setX(int x) {
 		this.X = x;

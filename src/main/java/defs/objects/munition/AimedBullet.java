@@ -8,7 +8,6 @@ public class AimedBullet extends Bullet {
 
 	public AimedBullet(Main main, int x, int y) {
 		super(main, x, y, 0, -15 * main.Height / 1080);
-		// this.setSpeed(-30);
 		setSize(4 * main.Height / 1080);
 		ratio = (main.getHanSolo().getX() - getX()) / (double) (main.getHanSolo().getY() - getY());
 	}

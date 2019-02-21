@@ -190,10 +190,9 @@ public abstract class Flyer extends Ball implements IDrawable {
 		main.removeEnemy(main.getEnemyIndex(this));
 		try {
 			this.finalize();
-			// System.out.println(this.toString()+" has been removed!");
 		} catch (Throwable e) {
 			e.printStackTrace();
-			// System.out.println(this.toString()+" could not be removed!");
+			// TODO
 		}
 	}
 

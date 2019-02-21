@@ -16,17 +16,12 @@ public class SecondStarDestroyer extends StarDestroyer {
 		this.setHealth(this.getHealth() - 2 * hit);
 		if (this.getHealth() < 1) {
 			main.add(new Explosion(main, getX() + (int) (0.5 * getSize()), getY() + getSize() + 10));
-			main.remove(this);
 			main.setLevel(main.getLevel() + 1);
 			main.setBoss(null);
 			@SuppressWarnings("unused")
 			Benefit tmp = new DoublePlainGunBenefit(main, getX(), getY(), 100, 2000);
 			main.getChewBacca().trigger();
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		}
 	}
 

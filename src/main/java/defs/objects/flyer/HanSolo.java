@@ -106,11 +106,6 @@ public final class HanSolo extends Flyer {
 		if (this.getY() > main.Height) {
 			selfDestroy(main);
 			Main.getStatistic().setPerfectGame(false);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
 		}
 		move();
 	}

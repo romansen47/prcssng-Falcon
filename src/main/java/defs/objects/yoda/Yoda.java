@@ -78,14 +78,9 @@ public class Yoda implements IDrawable {
 			if (getY() < main.Height) {
 				setY(getY() + 35 * main.Height / 1080);
 			} else {
-				main.remove(this);
 				level = 0;
 				main.setPaused(false);
-				try {
-					this.finalize();
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
+				selfDestroy(main);
 			}
 		}
 		draw(main);
@@ -107,6 +102,16 @@ public class Yoda implements IDrawable {
 	public double[] getPosition() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void selfDestroy(Main main) {
+		main.remove(this);
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
 
 }

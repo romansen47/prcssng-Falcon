@@ -41,12 +41,7 @@ public class Laser extends Bullet {
 	@Override
 	public void draw(Main main) {
 		if (main.getFrameCount() - frames > 3) {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		} else {
 			main.stroke(255, 30, 30);
 			if (NearestObject != null) {
@@ -63,12 +58,7 @@ public class Laser extends Bullet {
 	public void move(Main main) {
 		setY(getY() - getSpeedY());
 		if (getY() < 0 || getY() > main.Height) {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 			if (getSpeedY() > 0) {
 				Main.getStatistic().setMissed(Main.getStatistic().getMissed() + 1);
 			}
@@ -77,12 +67,7 @@ public class Laser extends Bullet {
 			if (obj != this && checkForImpact(obj) != null) {
 				obj.gotHit(main, getSchaden());
 				main.add(new Explosion(main, this.getX(), obj.getY() + obj.getSize()));
-				main.remove(this);
-				try {
-					this.finalize();
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
+				selfDestroy(main);
 			}
 			;
 		}

@@ -215,7 +215,7 @@ public class Main extends Gui {
 		} else {
 			getYodaObj().move(this);
 		}
-		Ball[] tmpPositions = temperature.Functions.Collision(Enemies, 1);
+		Ball[] tmpPositions = temperature.Functions.collision(Enemies, 1);
 		for (int i = 0; i < Enemies.length; i++) {
 			Enemies[i].setX(((int) (tmpPositions[i].getPosition()[0])));
 			Enemies[i].setY(((int) (tmpPositions[i].getPosition()[1])));

@@ -49,17 +49,13 @@ public class Bullet extends Ball implements IDrawable {
 		getPosition()[1] = y;
 	}
 
+	
 	@Override
 	public void move(Main main) {
 		setY(getY() - speedY);
 		setX(getX() + (int) (0.2 * speedX));
 		if (getY() < 0 || getY() > main.Height) {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 			if (speedY > 0) {
 				Main.getStatistic().setMissed(Main.getStatistic().getMissed() + 1);
 			}
@@ -116,6 +112,16 @@ public class Bullet extends Ball implements IDrawable {
 
 	public void setSpeedY(int Speed) {
 		this.speedY = Speed;
+	}
+
+	@Override
+	public void selfDestroy(Main main) {
+		main.remove(this);
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
 
 }

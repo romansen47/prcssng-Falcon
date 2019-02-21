@@ -83,17 +83,21 @@ public class Benefit implements IDrawable {
 			((HanSolo) (main.getHanSolo())).setMuni(((HanSolo) (main.getHanSolo())).getMuni() + 700);
 		}
 	}
+	
+	public void selfDestroy(Main main) {
+		main.remove(this);
+		try {
+			this.finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void gotHit(Main main, int i) {
 		setHealth(Math.max(0, getHealth() - i));
 		if (health == 0) {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		}
 	}
 

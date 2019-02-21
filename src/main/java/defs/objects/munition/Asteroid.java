@@ -21,7 +21,7 @@ public class Asteroid extends Bullet {
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getAsteroid(), getX() - ((int) (0.5 * getSize())), getY(), ((int) (0.5 * getSize())),
+		main.shape(main.getAsteroid(), (float)getX() - ((int) (0.5 * getSize())), getY(), ((int) (0.5 * getSize())),
 				((int) (0.5 * getSize())));
 	}
 
@@ -29,21 +29,17 @@ public class Asteroid extends Bullet {
 	public void move(Main main) {
 		setY(getY() - getSpeedY());
 		if (getY() < 0 || getY() > main.Height) {
-			main.remove(this);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		}
 		for (IDrawable obj : main.getObjects()) {
 			if (obj != this && checkForImpact(obj) != null) {
 				obj.gotHit(main, getSchaden());
 				main.add(new Explosion(main, this.getX(), obj.getY() + obj.getSize()));
-				try {
-					this.finalize();
-				} catch (Throwable e) {
-				}
+//				try {
+//					this.finalize();
+//				} catch (Throwable e) {
+//				}
+				selfDestroy(main);
 			}
 		}
 	}

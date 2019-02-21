@@ -50,11 +50,7 @@ public class FinalExplosion extends Explosion {
 			main.setYodaObj(new FinalYoda(main, main.getMessage()));
 			main.add(main.getYodaObj());
 			main.setPaused(true);
-			try {
-				this.finalize();
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
+			selfDestroy(main);
 		}
 	}
 

@@ -26,4 +26,5 @@ public interface IDrawable {
 		return null;
 	};
 
+	void selfDestroy(Main main);
 }
