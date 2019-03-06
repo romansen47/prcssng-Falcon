@@ -83,7 +83,8 @@ public class Benefit implements IDrawable {
 			((HanSolo) (main.getHanSolo())).setMuni(((HanSolo) (main.getHanSolo())).getMuni() + 700);
 		}
 	}
-	
+
+	@Override
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		try {

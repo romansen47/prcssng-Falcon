@@ -136,8 +136,8 @@ public class Main extends Gui {
 			prefix = "C:/Temp/data/";
 		}
 
-		prefix="data/";
-		
+		prefix = "data/";
+
 		BackGround = loadImage(prefix + "space.jpg");
 
 		Enemies = new EnemyFlyer[0];
@@ -153,7 +153,7 @@ public class Main extends Gui {
 		setYoda(loadShape(prefix + "yoda.svg"));
 		setDarth(loadShape(prefix + "vader.svg"));
 
-		prefix="";
+		prefix = "";
 		try {
 			setPlainGunSound(mn.loadSample(sketchPath(prefix + "laser.mp3")));
 			setExplosionSound(mn.loadSample(sketchPath(prefix + "explosion.mp3")));
@@ -162,10 +162,10 @@ public class Main extends Gui {
 			setVader(mn.loadSample(sketchPath(prefix + "Vader.mp3")));
 			setYodaLaughter(mn.loadSample(sketchPath(prefix + "YodaLaughter.mp3")));
 			setPlayer(mn.loadSample(sketchPath(prefix + "Theme.mp3")));
-		}catch(NullPointerException npe) {
+		} catch (NullPointerException npe) {
 			System.out.println("falscher Ordner!");
-		}finally {
-			prefix="./data/";
+		} finally {
+			prefix = "./data/";
 			setPlainGunSound(mn.loadSample(sketchPath(prefix + "laser.mp3")));
 			setExplosionSound(mn.loadSample(sketchPath(prefix + "explosion.mp3")));
 			setChewBacca(mn.loadSample(sketchPath(prefix + "chewbacca.wav")));
@@ -292,21 +292,22 @@ public class Main extends Gui {
 	}
 
 	public void drawInformation() {
-		fill(255 * (100 - ((HanSolo) getHanSolo()).getHealth()) / (float)((HanSolo) getHanSolo()).getMaxHealth(),
-				255 * ((HanSolo) getHanSolo()).getHealth() / (float)((HanSolo) getHanSolo()).getMaxHealth(), 0);
-		rect(30, 30, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getHealth() / (float)((HanSolo) getHanSolo()).getMaxHealth(),
-				30);
+		fill(255 * (100 - ((HanSolo) getHanSolo()).getHealth()) / (float) ((HanSolo) getHanSolo()).getMaxHealth(),
+				255 * ((HanSolo) getHanSolo()).getHealth() / (float) ((HanSolo) getHanSolo()).getMaxHealth(), 0);
+		rect(30, 30, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getHealth()
+				/ (float) ((HanSolo) getHanSolo()).getMaxHealth(), 30);
 		shape(heart, 40, 30, 30, 30);
 
 		fill(0, 0, 255);
-		rect(30, 80, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getMuni() / (float)((HanSolo) getHanSolo()).getMaxMuni(), 30);
+		rect(30, 80, (this.Width / 3.0f) * ((HanSolo) getHanSolo()).getMuni()
+				/ (float) ((HanSolo) getHanSolo()).getMaxMuni(), 30);
 		shape(muni, 40, 80, 30, 30);
 
 		fill(0, 255, 255);
-		rect(this.Width - (float)300, 30, 280, 60, 25);
+		rect(this.Width - (float) 300, 30, 280, 60, 25);
 		textSize(30);
 		fill(0);
-		text("Score: " + ((HanSolo) (getHanSolo())).getScore(), Width - (float)260, 80);
+		text("Score: " + ((HanSolo) (getHanSolo())).getScore(), Width - (float) 260, 80);
 	}
 
 	public void addOnTop(IDrawable obj) {

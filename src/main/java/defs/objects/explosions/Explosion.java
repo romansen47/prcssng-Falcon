@@ -31,6 +31,7 @@ public class Explosion implements IDrawable {
 		}
 	}
 
+	@Override
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		try {
@@ -39,7 +40,7 @@ public class Explosion implements IDrawable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void setX(int x) {
 		this.X = x;

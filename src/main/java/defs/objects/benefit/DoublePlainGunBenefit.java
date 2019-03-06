@@ -1,7 +1,6 @@
 package defs.objects.benefit;
 
 import defs.objects.flyer.HanSolo;
-import defs.objects.flyer.StarDestroyer;
 import defs.objects.guns.DoublePlainGun;
 import main.Main;
 

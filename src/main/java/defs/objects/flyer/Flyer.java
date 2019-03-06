@@ -185,6 +185,7 @@ public abstract class Flyer extends Ball implements IDrawable {
 		this.maxMuni = maxMuni;
 	}
 
+	@Override
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		main.removeEnemy(main.getEnemyIndex(this));

@@ -21,7 +21,7 @@ public class Asteroid extends Bullet {
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getAsteroid(), (float)getX() - ((int) (0.5 * getSize())), getY(), ((int) (0.5 * getSize())),
+		main.shape(main.getAsteroid(), (float) getX() - ((int) (0.5 * getSize())), getY(), ((int) (0.5 * getSize())),
 				((int) (0.5 * getSize())));
 	}
 

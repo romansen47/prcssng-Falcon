@@ -49,7 +49,6 @@ public class Bullet extends Ball implements IDrawable {
 		getPosition()[1] = y;
 	}
 
-	
 	@Override
 	public void move(Main main) {
 		setY(getY() - speedY);
