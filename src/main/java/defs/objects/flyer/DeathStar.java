@@ -20,18 +20,32 @@ public class DeathStar extends StarDestroyer {
 		main.setPaused(true);
 
 		main.setBoss(this);
-		setMaxHealth(6000);
-		setHealth(6000);
-		setSize(300 * main.Height / 1080);
-		setX((int) (0.5 * (main.Width)));
-		setY((-getSize()));
-		setGun(new DoubleAimingGun(this));
+		this.setMaxHealth(6000);
+		this.setHealth(6000);
+		this.setSize(300 * main.Height / 1080);
+		this.setX((int) (0.5 * (main.Width)));
+		this.setY((-this.getSize()));
+		this.setGun(new DoubleAimingGun(this));
 	}
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getDeathStar(), getX() - (int) (0.5 * getSize()), getY() - (int) (0.5 * getSize()), getSize(),
-				getSize());
+		main.shape(main.getDeathStar(), this.getX() - (int) (0.5 * this.getSize()),
+				this.getY() - (int) (0.5 * this.getSize()), this.getSize(), this.getSize());
+	}
+
+	@Override
+	public void gotHit(Main main, int hit) {
+		this.setHealth(this.getHealth() - hit);
+		if (this.getHealth() < 1) {
+			main.add(new DeathStarExplosion(main, this.getX() + (int) (0.5 * this.getSize()),
+					this.getY() + this.getSize() + 10));
+			main.add(new DarthVaderFlyer(main));
+			main.remove(this);
+			main.getChewBacca().trigger();
+			main.getHan().trigger();
+			main.setScore(((HanSolo) (main.getHanSolo())).getScore());
+		}
 	}
 
 	@Override
@@ -40,20 +54,7 @@ public class DeathStar extends StarDestroyer {
 			this.setY(this.getY() + 2);
 		}
 		if ((new Random()).nextInt(70) < 4) {
-			shoot(main);
-		}
-	}
-
-	@Override
-	public void gotHit(Main main, int hit) {
-		this.setHealth(this.getHealth() - hit);
-		if (this.getHealth() < 1) {
-			main.add(new DeathStarExplosion(main, getX() + (int) (0.5 * getSize()), getY() + getSize() + 10));
-			main.add(new DarthVaderFlyer(main));
-			main.remove(this);
-			main.getChewBacca().trigger();
-			main.getHan().trigger();
-			main.setScore(((HanSolo) (main.getHanSolo())).getScore());
+			this.shoot(main);
 		}
 	}
 }

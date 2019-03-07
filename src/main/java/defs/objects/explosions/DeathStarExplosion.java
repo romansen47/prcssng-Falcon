@@ -12,13 +12,13 @@ public class DeathStarExplosion extends FinalExplosion {
 
 	public DeathStarExplosion(Main main, int x, int y) {
 		super(main, x, y);
-		setSize(150);
-		setR(new Random());
+		this.setSize(150);
+		this.setR(new Random());
 	}
 
 	@Override
 	public void draw(Main main) {
-		for (IDrawable obj : main.getObjects()) {
+		for (final IDrawable obj : main.getObjects()) {
 			if (obj != main.getHanSolo()) {
 				main.remove(obj);
 			}
@@ -30,7 +30,7 @@ public class DeathStarExplosion extends FinalExplosion {
 	}
 
 	public Random getR() {
-		return r;
+		return this.r;
 	}
 
 	public void setR(Random r) {

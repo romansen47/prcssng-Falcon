@@ -13,89 +13,29 @@ public class Yoda implements IDrawable {
 		main.setPaused(true);
 		this.setX(300 * main.Height / 1080);
 		this.setY(main.Height);
-		setSize(Math.max(100 * main.Height / 1080, (Message.length + 1) * 40 * main.Height / 1080));
-	}
-
-	public String[] getMessage() {
-		return message;
-	}
-
-	public void setMessage(String[] message) {
-		this.message = message;
+		this.setSize(Math.max(100 * main.Height / 1080, (Message.length + 1) * 40 * main.Height / 1080));
 	}
 
 	@Override
 	public void draw(Main main) {
 		main.fill(0, 255, 0);
-		main.rect(getX(), getY(), 2 * getSize(), getSize());
+		main.rect(this.getX(), this.getY(), 2 * this.getSize(), this.getSize());
 		main.textSize(20 * main.Height / 1080);
-		for (int i = 0; i < message.length; i++) {
+		for (int i = 0; i < this.message.length; i++) {
 			main.fill(0);
-			main.text(message[i], getX() + 80 * main.Height / 1080, getY() + 50 + i * 20 * main.Height / 1080);
+			main.text(this.message[i], this.getX() + 80 * main.Height / 1080,
+					this.getY() + 50 + i * 20 * main.Height / 1080);
 		}
-		main.shape(main.getYoda(), getX() + 2 * getSize(), getY() + getSize(), getSize(), getSize());
-	}
-
-	@Override
-	public void setX(int x) {
-		X = x;
-	}
-
-	@Override
-	public void setY(int y) {
-		Y = y;
-	}
-
-	@Override
-	public int getX() {
-		return X;
-	}
-
-	@Override
-	public int getY() {
-		return Y;
-	}
-
-	@Override
-	public int getSize() {
-		return size;
-	}
-
-	@Override
-	public void setSize(int Size) {
-		size = Size;
-	}
-
-	@Override
-	public void move(Main main) {
-		if (level == 0) {
-			if (getY() > main.Height - 2 * getSize()) {
-				setY(getY() - 35 * main.Height / 1080);
-			} else if (main.mousePressed) {
-				level = 1;
-			}
-		} else {
-			if (getY() < main.Height) {
-				setY(getY() + 35 * main.Height / 1080);
-			} else {
-				level = 0;
-				main.setPaused(false);
-				selfDestroy(main);
-			}
-		}
-		draw(main);
-	}
-
-	@Override
-	public void gotHit(Main main, int i) {
+		main.shape(main.getYoda(), this.getX() + 2 * this.getSize(), this.getY() + this.getSize(), this.getSize(),
+				this.getSize());
 	}
 
 	public int getLevel() {
-		return level;
+		return this.level;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
+	public String[] getMessage() {
+		return this.message;
 	}
 
 	@Override
@@ -105,13 +45,75 @@ public class Yoda implements IDrawable {
 	}
 
 	@Override
+	public int getSize() {
+		return this.size;
+	}
+
+	@Override
+	public int getX() {
+		return this.X;
+	}
+
+	@Override
+	public int getY() {
+		return this.Y;
+	}
+
+	@Override
+	public void gotHit(Main main, int i) {
+	}
+
+	@Override
+	public void move(Main main) {
+		if (this.level == 0) {
+			if (this.getY() > main.Height - 2 * this.getSize()) {
+				this.setY(this.getY() - 35 * main.Height / 1080);
+			} else if (main.mousePressed) {
+				this.level = 1;
+			}
+		} else {
+			if (this.getY() < main.Height) {
+				this.setY(this.getY() + 35 * main.Height / 1080);
+			} else {
+				this.level = 0;
+				main.setPaused(false);
+				this.selfDestroy(main);
+			}
+		}
+		this.draw(main);
+	}
+
+	@Override
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		try {
 			this.finalize();
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setMessage(String[] message) {
+		this.message = message;
+	}
+
+	@Override
+	public void setSize(int Size) {
+		this.size = Size;
+	}
+
+	@Override
+	public void setX(int x) {
+		this.X = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.Y = y;
 	}
 
 }

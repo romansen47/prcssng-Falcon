@@ -8,7 +8,7 @@ public class LaserGun extends PlainGun {
 
 	public LaserGun(Flyer fly) {
 		super(fly);
-		setVerbrauch(6);
+		this.setVerbrauch(6);
 	}
 
 	@Override

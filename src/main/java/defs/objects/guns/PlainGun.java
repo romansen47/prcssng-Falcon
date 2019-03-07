@@ -11,8 +11,25 @@ public class PlainGun implements IShooting {
 	private int Verbrauch;
 
 	public PlainGun(Flyer fly) {
-		setFlyer(fly);
-		setVerbrauch(2);
+		this.setFlyer(fly);
+		this.setVerbrauch(2);
+	}
+
+	public Flyer getFlyer() {
+		return this.flyer;
+	}
+
+	@Override
+	public int getVerbrauch() {
+		return this.Verbrauch;
+	}
+
+	public void setFlyer(Flyer flyer) {
+		this.flyer = flyer;
+	}
+
+	public void setVerbrauch(int verbrauch) {
+		this.Verbrauch = verbrauch;
 	}
 
 	@Override
@@ -20,24 +37,7 @@ public class PlainGun implements IShooting {
 		main.add(new Bullet(main, this.getFlyer().getX(), this.getFlyer().getY() - 20,
 				(int) this.getFlyer().getSpeedX(), 20));
 		main.getPlainGunSound().trigger();
-		getFlyer().setMuni(getFlyer().getMuni() - getVerbrauch());
-	}
-
-	public Flyer getFlyer() {
-		return flyer;
-	}
-
-	public void setFlyer(Flyer flyer) {
-		this.flyer = flyer;
-	}
-
-	@Override
-	public int getVerbrauch() {
-		return Verbrauch;
-	}
-
-	public void setVerbrauch(int verbrauch) {
-		Verbrauch = verbrauch;
+		this.getFlyer().setMuni(this.getFlyer().getMuni() - this.getVerbrauch());
 	}
 
 }

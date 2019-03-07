@@ -5,14 +5,13 @@ import processing.template.Gui;
 public class SketchTemplate extends Gui {
 
 	/**
-	 * Use like a usual sketch in Processing IDE
+	 * Replace main.SketchTemplate
+	 * 
+	 * @param args Arguments delivered to PApplet
 	 */
 
-	@Override
-	public void setup() {
-		/**
-		 * super.setup();
-		 */
+	public static void main(String[] args) {
+		(new Gui()).run("main.SketchTemplate");
 	}
 
 	@Override
@@ -24,13 +23,14 @@ public class SketchTemplate extends Gui {
 	}
 
 	/**
-	 * Replace main.SketchTemplate
-	 * 
-	 * @param args Arguments delivered to PApplet
+	 * Use like a usual sketch in Processing IDE
 	 */
 
-	public static void main(String[] args) {
-		(new Gui()).run("main.SketchTemplate");
+	@Override
+	public void setup() {
+		/**
+		 * super.setup();
+		 */
 	}
 
 }

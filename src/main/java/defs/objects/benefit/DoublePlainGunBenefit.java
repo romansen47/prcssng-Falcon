@@ -12,10 +12,11 @@ public class DoublePlainGunBenefit extends LaserGunBenefit {
 
 	@Override
 	public void move(Main main) {
-		setY(getY() + 4);
-		if (main.getHanSolo().getY() <= getY() + getSize() && main.getHanSolo().getX() < getX() + getSize()
-				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > getX()
-				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > getY()) {
+		this.setY(this.getY() + 4);
+		if (main.getHanSolo().getY() <= this.getY() + this.getSize()
+				&& main.getHanSolo().getX() < this.getX() + this.getSize()
+				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > this.getX()
+				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > this.getY()) {
 			main.remove(this);
 			((HanSolo) (main.getHanSolo())).addGun(new DoublePlainGun((HanSolo) (main.getHanSolo())));
 		}

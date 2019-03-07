@@ -12,34 +12,34 @@ public class Asteroid extends Bullet {
 
 	public Asteroid(Main main) {
 		super(main, 0, 0, 0, 0);
-		setSize(((25 + r.nextInt(40)) * main.Height) / 1080);
-		setX(((new Random()).nextInt((main.Width))));
-		setY(1);
-		setSpeedY(-5 - r.nextInt(10 * main.Height / 1080));
-		setSchaden(3);
+		this.setSize(((25 + this.r.nextInt(40)) * main.Height) / 1080);
+		this.setX(((new Random()).nextInt((main.Width))));
+		this.setY(1);
+		this.setSpeedY(-5 - this.r.nextInt(10 * main.Height / 1080));
+		this.setSchaden(3);
 	}
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getAsteroid(), (float) getX() - ((int) (0.5 * getSize())), getY(), ((int) (0.5 * getSize())),
-				((int) (0.5 * getSize())));
+		main.shape(main.getAsteroid(), (float) this.getX() - ((int) (0.5 * this.getSize())), this.getY(),
+				((int) (0.5 * this.getSize())), ((int) (0.5 * this.getSize())));
 	}
 
 	@Override
 	public void move(Main main) {
-		setY(getY() - getSpeedY());
-		if (getY() < 0 || getY() > main.Height) {
-			selfDestroy(main);
+		this.setY(this.getY() - this.getSpeedY());
+		if (this.getY() < 0 || this.getY() > main.Height) {
+			this.selfDestroy(main);
 		}
-		for (IDrawable obj : main.getObjects()) {
-			if (obj != this && checkForImpact(obj) != null) {
-				obj.gotHit(main, getSchaden());
+		for (final IDrawable obj : main.getObjects()) {
+			if (obj != this && this.checkForImpact(obj) != null) {
+				obj.gotHit(main, this.getSchaden());
 				main.add(new Explosion(main, this.getX(), obj.getY() + obj.getSize()));
 //				try {
 //					this.finalize();
 //				} catch (Throwable e) {
 //				}
-				selfDestroy(main);
+				this.selfDestroy(main);
 			}
 		}
 	}

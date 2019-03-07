@@ -8,16 +8,26 @@ public class Benefit implements IDrawable {
 
 	private static boolean firstBenefit = true;
 
+	public static boolean isFirstTime() {
+		return Benefit.firstBenefit;
+	}
+
+	public static void setFirstTime(boolean firstTime) {
+		Benefit.firstBenefit = firstTime;
+	}
+
 	private int X, Y, size;
+
 	private int maxhealth;
+
 	private int health;
 
 	public Benefit(Main main, int x, int y, int size, int health) {
-		setX(x);
-		setY(y);
-		setSize(size * main.Height / 1080);
-		setMaxhealth(health);
-		setHealth(health);
+		this.setX(x);
+		this.setY(y);
+		this.setSize(size * main.Height / 1080);
+		this.setMaxhealth(health);
+		this.setHealth(health);
 		main.addOnTop(this);
 		if (Benefit.isFirstTime()) {
 			Benefit.setFirstTime(false);
@@ -35,49 +45,58 @@ public class Benefit implements IDrawable {
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getBenefit(), getX() - ((int) (0.5 * getSize())), getY() - ((int) (0.5 * getSize()) - 20),
-				getSize(), getSize());
-		main.fill(255 * (getMaxhealth() - getHealth()) / getMaxhealth(), 255 * getHealth() / getMaxhealth(), 0);
-		main.rect(getX() - ((int) (0.5 * getSize())), getY() - ((int) (0.5 * getSize())) - 10,
-				(int) (1. * getHealth() / getMaxhealth() * getSize()), 8, 50);
+		main.shape(main.getBenefit(), this.getX() - ((int) (0.5 * this.getSize())),
+				this.getY() - ((int) (0.5 * this.getSize()) - 20), this.getSize(), this.getSize());
+		main.fill(255 * (this.getMaxhealth() - this.getHealth()) / this.getMaxhealth(),
+				255 * this.getHealth() / this.getMaxhealth(), 0);
+		main.rect(this.getX() - ((int) (0.5 * this.getSize())), this.getY() - ((int) (0.5 * this.getSize())) - 10,
+				(int) (1. * this.getHealth() / this.getMaxhealth() * this.getSize()), 8, 50);
+	}
+
+	public int getHealth() {
+		return this.health;
+	}
+
+	public int getMaxhealth() {
+		return this.maxhealth;
 	}
 
 	@Override
-	public void setX(int x) {
-		this.X = x;
-	}
-
-	@Override
-	public void setY(int y) {
-		this.Y = y;
-	}
-
-	@Override
-	public int getX() {
-		return X;
-	}
-
-	@Override
-	public int getY() {
-		return Y;
+	public double[] getPosition() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int getSize() {
-		return size;
+		return this.size;
 	}
 
 	@Override
-	public void setSize(int size) {
-		this.size = size;
+	public int getX() {
+		return this.X;
+	}
+
+	@Override
+	public int getY() {
+		return this.Y;
+	}
+
+	@Override
+	public void gotHit(Main main, int i) {
+		this.setHealth(Math.max(0, this.getHealth() - i));
+		if (this.health == 0) {
+			this.selfDestroy(main);
+		}
 	}
 
 	@Override
 	public void move(Main main) {
-		setY(getY() + 7);
-		if (main.getHanSolo().getY() <= getY() + getSize() && main.getHanSolo().getX() < getX() + getSize()
-				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > getX()
-				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > getY()) {
+		this.setY(this.getY() + 7);
+		if (main.getHanSolo().getY() <= this.getY() + this.getSize()
+				&& main.getHanSolo().getX() < this.getX() + this.getSize()
+				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > this.getX()
+				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > this.getY()) {
 			main.remove(this);
 			((HanSolo) (main.getHanSolo())).setHealth(((HanSolo) (main.getHanSolo())).getHealth() + 100);
 			((HanSolo) (main.getHanSolo())).setMuni(((HanSolo) (main.getHanSolo())).getMuni() + 700);
@@ -89,47 +108,32 @@ public class Benefit implements IDrawable {
 		main.remove(this);
 		try {
 			this.finalize();
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
-	@Override
-	public void gotHit(Main main, int i) {
-		setHealth(Math.max(0, getHealth() - i));
-		if (health == 0) {
-			selfDestroy(main);
-		}
-	}
-
-	public int getMaxhealth() {
-		return maxhealth;
+	public void setHealth(int h) {
+		this.health = Math.max(0, Math.min(h, this.maxhealth));
 	}
 
 	public void setMaxhealth(int h) {
 		this.maxhealth = h;
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int h) {
-		this.health = Math.max(0, Math.min(h, maxhealth));
-	}
-
-	public static boolean isFirstTime() {
-		return firstBenefit;
-	}
-
-	public static void setFirstTime(boolean firstTime) {
-		Benefit.firstBenefit = firstTime;
+	@Override
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	@Override
-	public double[] getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setX(int x) {
+		this.X = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.Y = y;
 	}
 
 }

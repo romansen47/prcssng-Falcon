@@ -12,43 +12,36 @@ public class Explosion implements IDrawable {
 	public Explosion(Main main, int x, int y) {
 		// image = main.getExplosion();
 		this.setFrames(main.getFrameCount());
-		setX(x);
-		setY(y);
+		this.setX(x);
+		this.setY(y);
 		main.getExplosionSound().trigger();
 	}
 
 	@Override
 	public void draw(Main main) {
-		double expSize = 10;
-		if ((main.getFrameCount() - getFrames()) < expSize) {
-			main.shape(main.getExplosion(), ((int) (getX() - getSize() / 5.0)), getY() - 5,
-					(int) (0.05 * Math.sqrt(getFrames() / expSize * (main.getFrameCount() - getFrames()) / expSize)
-							* getSize()),
-					(int) (0.05 * Math.sqrt(getFrames() / expSize * (main.getFrameCount() - getFrames()) / expSize)
-							* getSize()));
+		final double expSize = 10;
+		if ((main.getFrameCount() - this.getFrames()) < expSize) {
+			main.shape(main.getExplosion(), ((int) (this.getX() - this.getSize() / 5.0)), this.getY() - 5,
+					(int) (0.05
+							* Math.sqrt(
+									this.getFrames() / expSize * (main.getFrameCount() - this.getFrames()) / expSize)
+							* this.getSize()),
+					(int) (0.05
+							* Math.sqrt(
+									this.getFrames() / expSize * (main.getFrameCount() - this.getFrames()) / expSize)
+							* this.getSize()));
 		} else {
-			selfDestroy(main);
+			this.selfDestroy(main);
 		}
 	}
 
-	@Override
-	public void selfDestroy(Main main) {
-		main.remove(this);
-		try {
-			this.finalize();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+	public int getFrames() {
+		return this.frames;
 	}
 
 	@Override
-	public void setX(int x) {
-		this.X = x;
-	}
-
-	@Override
-	public void setY(int y) {
-		this.Y = y;
+	public int getSize() {
+		return 150;
 	}
 
 	@Override
@@ -62,12 +55,7 @@ public class Explosion implements IDrawable {
 	}
 
 	@Override
-	public int getSize() {
-		return 150;
-	}
-
-	@Override
-	public void setSize(int size) {
+	public void gotHit(Main main, int i) {
 	}
 
 	@Override
@@ -75,15 +63,31 @@ public class Explosion implements IDrawable {
 	}
 
 	@Override
-	public void gotHit(Main main, int i) {
-	}
-
-	public int getFrames() {
-		return frames;
+	public void selfDestroy(Main main) {
+		main.remove(this);
+		try {
+			this.finalize();
+		} catch (final Throwable e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setFrames(int frames) {
 		this.frames = frames;
+	}
+
+	@Override
+	public void setSize(int size) {
+	}
+
+	@Override
+	public void setX(int x) {
+		this.X = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.Y = y;
 	}
 
 }

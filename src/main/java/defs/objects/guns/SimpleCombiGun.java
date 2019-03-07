@@ -9,7 +9,7 @@ public class SimpleCombiGun extends PlainGun {
 
 	public SimpleCombiGun(Flyer fly) {
 		super(fly);
-		setVerbrauch(2 * getVerbrauch() + (new LaserGun(fly)).getVerbrauch());
+		this.setVerbrauch(2 * this.getVerbrauch() + (new LaserGun(fly)).getVerbrauch());
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class SimpleCombiGun extends PlainGun {
 			main.addOnTop(new Laser(main, this.getFlyer().getX() + (int) (0.6 * this.getFlyer().getSize()),
 					this.getFlyer().getY()));
 		}
-		getFlyer().setMuni(getFlyer().getMuni() - getVerbrauch());
+		this.getFlyer().setMuni(this.getFlyer().getMuni() - this.getVerbrauch());
 	}
 
 }

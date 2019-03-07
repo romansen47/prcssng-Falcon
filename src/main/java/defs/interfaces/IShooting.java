@@ -4,8 +4,8 @@ import main.Main;
 
 public interface IShooting {
 
-	void shoot(Main main);
-
 	int getVerbrauch();
+
+	void shoot(Main main);
 
 }

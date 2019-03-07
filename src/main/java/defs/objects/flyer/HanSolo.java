@@ -15,108 +15,109 @@ public final class HanSolo extends Flyer {
 	private IShooting[] Guns;
 
 	public HanSolo(Main main) {
-		Guns = new IShooting[1];
-		Guns[0] = new PlainGun(this);
-		setGun(Guns[0]);
-		setSize(90 * main.Height / 1080);
-		setX(main.Width / 2);
-		setY(main.Height - ((int) (1.5 * this.getSize())));
-		setMaxHealth(400);
-		setHealth(400);
-		setMaxMuni(2000);
+		this.Guns = new IShooting[1];
+		this.Guns[0] = new PlainGun(this);
+		this.setGun(this.Guns[0]);
+		this.setSize(90 * main.Height / 1080);
+		this.setX(main.Width / 2);
+		this.setY(main.Height - ((int) (1.5 * this.getSize())));
+		this.setMaxHealth(400);
+		this.setHealth(400);
+		this.setMaxMuni(2000);
+	}
+
+	public void addGun(IShooting gun) {
+		final IShooting[] tmpGuns = new IShooting[this.Guns.length + 1];
+		for (int i = 0; i < this.Guns.length; i++) {
+			tmpGuns[i] = this.Guns[i];
+		}
+		tmpGuns[this.Guns.length] = gun;
+		this.Guns = tmpGuns;
+		this.setGun(gun);
+	}
+
+	public void addScore(int n) {
+		this.Score = Math.max(0, this.Score + n);
 	}
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getHansolo(), getX() - (int) (0.5 * getSize()), getY() - ((int) (0.5 * getSize())), getSize(),
-				getSize());
+		main.shape(main.getHansolo(), this.getX() - (int) (0.5 * this.getSize()),
+				this.getY() - ((int) (0.5 * this.getSize())), this.getSize(), this.getSize());
+	}
+
+	public int getScore() {
+		return this.Score;
 	}
 
 	@Override
 	public void gotHit(Main main, int hit) {
 		this.setHealth(this.getHealth() - hit);
 		if (this.getHealth() < 1) {
-			main.setScore(getScore());
-			main.add(new FinalExplosion(main, getX() + (int) (0.5 * getSize()), getY() + (int) (0.0 * getSize())));
+			main.setScore(this.getScore());
+			main.add(new FinalExplosion(main, this.getX() + (int) (0.5 * this.getSize()),
+					this.getY() + (int) (0.0 * this.getSize())));
 			main.remove(this);
-		}
-	}
-
-	public void setScore(int n) {
-		Score = Math.min(0, n);
-	}
-
-	public int getScore() {
-		return Score;
-	}
-
-	public void addScore(int n) {
-		Score = Math.max(0, Score + n);
-	}
-
-	private int indexGun() {
-		for (int i = 0; i < Guns.length; i++) {
-			if (this.getGun() == Guns[i]) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public void nextGun() {
-		int n = indexGun();
-		if (n == Guns.length - 1) {
-			setGun(Guns[0]);
-		} else {
-			setGun(Guns[n + 1]);
-		}
-	}
-
-	public void prevGun() {
-		int n = indexGun();
-		if (n == 0) {
-			setGun(Guns[Guns.length - 1]);
-		} else {
-			setGun(Guns[n - 1]);
 		}
 	}
 
 	@Override
 	public void move() {
-		setX((int) (getX() + this.getVelocity()[0]));
-		setY((int) (getY() + this.getVelocity()[1]));
+		this.setX((int) (this.getX() + this.getVelocity()[0]));
+		this.setY((int) (this.getY() + this.getVelocity()[1]));
 	}
 
 	@Override
 	public void move(Main main) {
 		if (this.getHealth() < 0) {
 			main.remove(this);
-			main.add(new Explosion(main, getX(), getY()));
+			main.add(new Explosion(main, this.getX(), this.getY()));
 		}
-		double[] Mouse = new double[2];
+		final double[] Mouse = new double[2];
 		Mouse[0] = main.mouseX;
 		Mouse[1] = main.mouseY;
 		this.setVelocity(Functions.mathOperator.ScalarMultiplication(0.1, Functions.mathOperator
 				.AdditionOfVectors(Functions.mathOperator.ReversalOfVector(this.getPosition()), Mouse)));
 
 		if (main.getFrameCount() % 4 == 0 && (main.mousePressed && main.mouseButton == PConstants.LEFT)) {
-			shoot(main);
+			this.shoot(main);
 			Main.getStatistic().setShots(Main.getStatistic().getShots() + 1);
 		}
 		if (this.getY() > main.Height) {
-			selfDestroy(main);
+			this.selfDestroy(main);
 			Main.getStatistic().setPerfectGame(false);
 		}
-		move();
+		this.move();
 	}
 
-	public void addGun(IShooting gun) {
-		IShooting[] tmpGuns = new IShooting[Guns.length + 1];
-		for (int i = 0; i < Guns.length; i++) {
-			tmpGuns[i] = Guns[i];
+	public void nextGun() {
+		final int n = this.indexGun();
+		if (n == this.Guns.length - 1) {
+			this.setGun(this.Guns[0]);
+		} else {
+			this.setGun(this.Guns[n + 1]);
 		}
-		tmpGuns[Guns.length] = gun;
-		Guns = tmpGuns;
-		setGun(gun);
+	}
+
+	public void prevGun() {
+		final int n = this.indexGun();
+		if (n == 0) {
+			this.setGun(this.Guns[this.Guns.length - 1]);
+		} else {
+			this.setGun(this.Guns[n - 1]);
+		}
+	}
+
+	public void setScore(int n) {
+		this.Score = Math.min(0, n);
+	}
+
+	private int indexGun() {
+		for (int i = 0; i < this.Guns.length; i++) {
+			if (this.getGun() == this.Guns[i]) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

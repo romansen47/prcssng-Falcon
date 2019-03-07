@@ -4,14 +4,6 @@ public class StatsCollector {
 
 	private static StatsCollector instance;
 
-	private StatsCollector() {
-		setShots(0);
-		setMissed(0);
-		setEnemies(0);
-		setKills(0);
-		setPerfectGame(true);
-	}
-
 	public static StatsCollector getInstance() {
 		if (StatsCollector.instance == null) {
 			StatsCollector.instance = new StatsCollector();
@@ -19,47 +11,56 @@ public class StatsCollector {
 		return StatsCollector.instance;
 	}
 
-	public int getMissed() {
-		return missed;
-	}
+	private int shots, missed, enemies, kills;
 
-	public void setMissed(int missed) {
-		this.missed = missed;
+	private boolean perfectGame;
+
+	private StatsCollector() {
+		this.setShots(0);
+		this.setMissed(0);
+		this.setEnemies(0);
+		this.setKills(0);
+		this.setPerfectGame(true);
 	}
 
 	public int getEnemies() {
-		return enemies;
+		return this.enemies;
+	}
+
+	public int getKills() {
+		return this.kills;
+	}
+
+	public int getMissed() {
+		return this.missed;
+	}
+
+	public int getShots() {
+		return this.shots;
+	}
+
+	public boolean isPerfectGame() {
+		return this.perfectGame;
 	}
 
 	public void setEnemies(int enemies) {
 		this.enemies = enemies;
 	}
 
-	public int getKills() {
-		return kills;
-	}
-
 	public void setKills(int kills) {
 		this.kills = kills;
 	}
 
-	public int getShots() {
-		return shots;
-	}
-
-	public void setShots(int shots) {
-		this.shots = shots;
-	}
-
-	public boolean isPerfectGame() {
-		return perfectGame;
+	public void setMissed(int missed) {
+		this.missed = missed;
 	}
 
 	public void setPerfectGame(boolean perfectGame) {
 		this.perfectGame = perfectGame;
 	}
 
-	private int shots, missed, enemies, kills;
-	private boolean perfectGame;
+	public void setShots(int shots) {
+		this.shots = shots;
+	}
 
 }
