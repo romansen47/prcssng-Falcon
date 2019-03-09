@@ -5,9 +5,9 @@ import main.Main;
 
 public class Explosion implements IDrawable {
 
-	private int X, Y;
 	private int frames;
 	// private PImage image;
+	private int X, Y;
 
 	public Explosion(Main main, int x, int y) {
 		// image = main.getExplosion();

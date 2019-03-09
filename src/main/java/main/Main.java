@@ -29,14 +29,14 @@ import temperature.Ball;
 public class Main extends Gui {
 
 	/**
-	 * Collector structure
-	 */
-	private final static StatsCollector statistic = StatsCollector.getInstance();
-
-	/**
 	 * prefix for fully qualified path name
 	 */
 	private static String prefix;
+
+	/**
+	 * Collector structure
+	 */
+	private final static StatsCollector statistic = StatsCollector.getInstance();
 
 	public static StatsCollector getStatistic() {
 		return Main.statistic;
@@ -47,24 +47,19 @@ public class Main extends Gui {
 	}
 
 	/**
-	 * Counter for score
+	 * test data
 	 */
-	private int Score;
+	private PImage BackGround;
 
 	/**
-	 * trigger for stopping the game
+	 * StarFghter or DeathStar as private instances
 	 */
-	private boolean paused = false;
+	private IDrawable Boss;
 
 	/**
 	 * trigger for mouse click
 	 */
 	private int clicked;
-
-	/**
-	 * Counter for frames
-	 */
-	private int frameCount;
 
 	/**
 	 * Container for the EnemyFlyer instances. These instances interact when they
@@ -73,9 +68,9 @@ public class Main extends Gui {
 	private EnemyFlyer[] Enemies;
 
 	/**
-	 * Container for all objects that are drawn on a frame
+	 * Counter for frames
 	 */
-	private IDrawable[] objects;
+	private int frameCount;
 
 	/**
 	 * HanSolo object as an attribute
@@ -83,19 +78,9 @@ public class Main extends Gui {
 	private IDrawable HanSolo;
 
 	/**
-	 * Minim sound player instance
+	 * Various test data
 	 */
-	final public Minim mn = new Minim(this);
-
-	/**
-	 * Sound samples
-	 */
-	private AudioSample player, PlainGunSound, ExplosionSound, ChewBacca, han, Vader, yodaLaughter;
-
-	/**
-	 * StarFghter or DeathStar as private instances
-	 */
-	private IDrawable Boss;
+	private PShape heart, explosion, muni, yoda, flyer, stardestroyer, deathStar, benefit, hansolo, asteroid, darth;
 
 	/**
 	 * Counter for level of game
@@ -103,24 +88,39 @@ public class Main extends Gui {
 	private int level = 0;
 
 	/**
-	 * Various test data
+	 * Message for Yoda
 	 */
-	private PShape heart, explosion, muni, yoda, flyer, stardestroyer, deathStar, benefit, hansolo, asteroid, darth;
+	private String[] message;
 
 	/**
-	 * test data
+	 * Minim sound player instance
 	 */
-	private PImage BackGround;
+	final public Minim mn = new Minim(this);
+
+	/**
+	 * Container for all objects that are drawn on a frame
+	 */
+	private IDrawable[] objects;
+
+	/**
+	 * trigger for stopping the game
+	 */
+	private boolean paused = false;
+
+	/**
+	 * Sound samples
+	 */
+	private AudioSample player, PlainGunSound, ExplosionSound, ChewBacca, han, Vader, yodaLaughter;
+
+	/**
+	 * Counter for score
+	 */
+	private int Score;
 
 	/**
 	 * Yoda messenger instance
 	 */
 	private Yoda Yoda;
-
-	/**
-	 * Message for Yoda
-	 */
-	private String[] message;
 
 	public void add(IDrawable obj) {
 		final IDrawable[] tmp = this.getObjects().clone();

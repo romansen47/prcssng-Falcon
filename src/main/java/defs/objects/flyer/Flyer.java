@@ -17,11 +17,11 @@ public abstract class Flyer extends Ball implements IDrawable {
 	// private IShooting[] Guns;
 	private IShooting Gun;
 
-	private int maxHealth = 60, maxShield = 100, maxMuni = 2000;
 	private int health, shield;
-	private int muni = 2000;
-
 	private PImage image;
+	private int maxHealth = 60, maxShield = 100, maxMuni = 2000;
+
+	private int muni = 2000;
 
 	public Flyer() {
 	}

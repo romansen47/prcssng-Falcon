@@ -41,6 +41,21 @@ public class Laser extends Bullet {
 		}
 	}
 
+	private IDrawable getNearestObject(Main main) {
+		double dist = main.Height;
+		IDrawable ans = null;
+		for (final IDrawable obj : main.getObjects()) {
+			if (dist > 0 && !(obj instanceof Bullet) && !(obj instanceof Explosion) && obj != this
+					&& obj.getY() < main.getHanSolo().getY() && (main.getHanSolo().getY() - obj.getY()) < dist
+					&& this.getX() > obj.getX() - (0.5 * obj.getSize())
+					&& this.getX() < obj.getX() + (0.5 * obj.getSize())) {
+				ans = obj;
+				dist = main.getHanSolo().getY() - obj.getY();
+			}
+		}
+		return ans;
+	}
+
 	@Override
 	public void move(Main main) {
 		this.setY(this.getY() - this.getSpeedY());
@@ -57,20 +72,5 @@ public class Laser extends Bullet {
 				this.selfDestroy(main);
 			}
 		}
-	}
-
-	private IDrawable getNearestObject(Main main) {
-		double dist = main.Height;
-		IDrawable ans = null;
-		for (final IDrawable obj : main.getObjects()) {
-			if (dist > 0 && !(obj instanceof Bullet) && !(obj instanceof Explosion) && obj != this
-					&& obj.getY() < main.getHanSolo().getY() && (main.getHanSolo().getY() - obj.getY()) < dist
-					&& this.getX() > obj.getX() - (0.5 * obj.getSize())
-					&& this.getX() < obj.getX() + (0.5 * obj.getSize())) {
-				ans = obj;
-				dist = main.getHanSolo().getY() - obj.getY();
-			}
-		}
-		return ans;
 	}
 }

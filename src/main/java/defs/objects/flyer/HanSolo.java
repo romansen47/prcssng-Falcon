@@ -10,9 +10,9 @@ import temperature.Functions;
 
 public final class HanSolo extends Flyer {
 
-	private int Score = 0;
-
 	private IShooting[] Guns;
+
+	private int Score = 0;
 
 	public HanSolo(Main main) {
 		this.Guns = new IShooting[1];
@@ -59,6 +59,15 @@ public final class HanSolo extends Flyer {
 					this.getY() + (int) (0.0 * this.getSize())));
 			main.remove(this);
 		}
+	}
+
+	private int indexGun() {
+		for (int i = 0; i < this.Guns.length; i++) {
+			if (this.getGun() == this.Guns[i]) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
@@ -110,14 +119,5 @@ public final class HanSolo extends Flyer {
 
 	public void setScore(int n) {
 		this.Score = Math.min(0, n);
-	}
-
-	private int indexGun() {
-		for (int i = 0; i < this.Guns.length; i++) {
-			if (this.getGun() == this.Guns[i]) {
-				return i;
-			}
-		}
-		return -1;
 	}
 }

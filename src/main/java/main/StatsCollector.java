@@ -11,9 +11,9 @@ public class StatsCollector {
 		return StatsCollector.instance;
 	}
 
-	private int shots, missed, enemies, kills;
-
 	private boolean perfectGame;
+
+	private int shots, missed, enemies, kills;
 
 	private StatsCollector() {
 		this.setShots(0);

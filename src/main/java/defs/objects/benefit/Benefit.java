@@ -16,11 +16,11 @@ public class Benefit implements IDrawable {
 		Benefit.firstBenefit = firstTime;
 	}
 
-	private int X, Y, size;
+	private int health;
 
 	private int maxhealth;
 
-	private int health;
+	private int X, Y, size;
 
 	public Benefit(Main main, int x, int y, int size, int health) {
 		this.setX(x);

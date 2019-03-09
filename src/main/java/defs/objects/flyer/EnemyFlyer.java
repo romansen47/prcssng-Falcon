@@ -9,10 +9,10 @@ import temperature.Functions;
 
 public class EnemyFlyer extends Flyer {
 
+	final double AbsVel;
 	private int deltaX, acceleration;
 	private int[] force;
 	private double intelligence;
-	final double AbsVel;
 
 	public EnemyFlyer(Main main) {
 		super(main, (int) (main.Width / 2.0 - ((new Random()).nextInt()) % (main.Width / 6)), 200);
