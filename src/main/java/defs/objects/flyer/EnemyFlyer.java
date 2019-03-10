@@ -41,7 +41,8 @@ public class EnemyFlyer extends Flyer {
 
 	@Override
 	public void move() {
-		this.setPosition(Functions.mathOperator.AdditionOfVectors(this.getPosition(), this.getVelocity()));
+		this.setPosition(
+				Functions.getInstance().getMathOperator().AdditionOfVectors(this.getPosition(), this.getVelocity()));
 	}
 
 	@Override
@@ -63,12 +64,14 @@ public class EnemyFlyer extends Flyer {
 		vec1[1] = main.Height / 8;
 		vec2[0] = this.getX();
 		vec2[1] = this.getY();
-		double[] frc = Functions.mathOperator.AdditionOfVectors(vec1, Functions.mathOperator.ReversalOfVector(vec2));
-		final double tmpLength = Functions.mathOperator.MagnitudeOfVector(frc);
+		double[] frc = Functions.getInstance().getMathOperator().AdditionOfVectors(vec1,
+				Functions.getInstance().getMathOperator().ReversalOfVector(vec2));
+		final double tmpLength = Functions.getInstance().getMathOperator().MagnitudeOfVector(frc);
 		if (tmpLength > 0.1) {
-			frc = Functions.mathOperator.ScalarMultiplication(0.1, Functions.mathOperator.UnitVector(frc));
+			frc = Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
+					Functions.getInstance().getMathOperator().UnitVector(frc));
 		}
-		this.setVelocity(Functions.mathOperator.AdditionOfVectors(frc, this.getVelocity()));
+		this.setVelocity(Functions.getInstance().getMathOperator().AdditionOfVectors(frc, this.getVelocity()));
 //		if(Math.abs(this.getPosition()[0]-((HanSolo)(main.getHanSolo())).getPosition()[0])>50) 
 //		{
 //			if (getAcceleration()>0) {

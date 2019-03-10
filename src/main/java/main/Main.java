@@ -25,8 +25,15 @@ import processing.core.PShape;
 import processing.event.MouseEvent;
 import processing.template.Gui;
 import temperature.Ball;
+import temperature.Functions;
+import temperature.IFunctions;
 
 public class Main extends Gui {
+
+	/**
+	 * Math functions
+	 */
+	private final IFunctions functions = Functions.getInstance();
 
 	/**
 	 * prefix for fully qualified path name
@@ -231,7 +238,7 @@ public class Main extends Gui {
 		} else {
 			this.getYodaObj().move(this);
 		}
-		final Ball[] tmpPositions = temperature.Functions.collision(this.Enemies, 1);
+		final Ball[] tmpPositions = getFunctions().collision(this.Enemies, 1);
 		for (int i = 0; i < this.Enemies.length; i++) {
 			this.Enemies[i].setX(((int) (tmpPositions[i].getPosition()[0])));
 			this.Enemies[i].setY(((int) (tmpPositions[i].getPosition()[1])));
@@ -628,5 +635,12 @@ public class Main extends Gui {
 
 	public void setYodaObj(Yoda yoda) {
 		this.Yoda = yoda;
+	}
+
+	/**
+	 * @return the functions
+	 */
+	public IFunctions getFunctions() {
+		return functions;
 	}
 }

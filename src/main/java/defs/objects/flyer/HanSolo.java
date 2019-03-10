@@ -85,8 +85,9 @@ public final class HanSolo extends Flyer {
 		final double[] Mouse = new double[2];
 		Mouse[0] = main.mouseX;
 		Mouse[1] = main.mouseY;
-		this.setVelocity(Functions.mathOperator.ScalarMultiplication(0.1, Functions.mathOperator
-				.AdditionOfVectors(Functions.mathOperator.ReversalOfVector(this.getPosition()), Mouse)));
+		this.setVelocity(Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
+				Functions.getInstance().getMathOperator().AdditionOfVectors(
+						Functions.getInstance().getMathOperator().ReversalOfVector(this.getPosition()), Mouse)));
 
 		if (main.getFrameCount() % 4 == 0 && (main.mousePressed && main.mouseButton == PConstants.LEFT)) {
 			this.shoot(main);
