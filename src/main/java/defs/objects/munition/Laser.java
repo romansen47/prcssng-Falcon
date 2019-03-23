@@ -6,14 +6,14 @@ import main.Main;
 
 public class Laser extends Bullet {
 
-	final int frames;
-	IDrawable NearestObject;
-	public int Schaden = 30;
+	final int	frames;
+	IDrawable	NearestObject;
+	public int	Schaden	= 30;
 
 	public Laser(Main main, int x, int y) {
 		super(main, x, y, 0, 0);
-		frames = main.getFrameCount();
-		NearestObject = getNearestObject(main);
+		frames			= main.getFrameCount();
+		NearestObject	= getNearestObject(main);
 	}
 
 	@Override
@@ -41,14 +41,14 @@ public class Laser extends Bullet {
 	}
 
 	private IDrawable getNearestObject(Main main) {
-		double dist = main.Height;
-		IDrawable ans = null;
+		double		dist	= main.Height;
+		IDrawable	ans		= null;
 		for (final IDrawable obj : main.getObjects()) {
 			if (dist > 0 && !(obj instanceof Bullet) && !(obj instanceof Explosion) && obj != this
 					&& obj.getY() < main.getHanSolo().getY() && (main.getHanSolo().getY() - obj.getY()) < dist
 					&& getX() > obj.getX() - (0.5 * obj.getSize()) && getX() < obj.getX() + (0.5 * obj.getSize())) {
-				ans = obj;
-				dist = main.getHanSolo().getY() - obj.getY();
+				ans		= obj;
+				dist	= main.getHanSolo().getY() - obj.getY();
 			}
 		}
 		return ans;

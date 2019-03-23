@@ -5,8 +5,8 @@ import main.Main;
 
 public class Yoda implements IDrawable {
 
-	private String[] message;
-	private int X, Y, size, level = 0;
+	private String[]	message;
+	private int			X, Y, size, level = 0;
 
 	public Yoda(Main main, String[] Message) {
 		message = Message;

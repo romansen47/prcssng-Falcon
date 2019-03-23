@@ -12,11 +12,11 @@ public class LaserGunBenefit extends Benefit {
 		if (StarDestroyer.isFirstDestroyer()) {
 			StarDestroyer.setFirstDestroyer(false);
 			main.setMessage(new String[5]);
-			main.getMessage()[0] = "";
-			main.getMessage()[1] = "Achtung!";
-			main.getMessage()[3] = "Ersatzteile dieser Sternenzerstörer verloren hat";
-			main.getMessage()[4] = "R2D2 sie an den Millenium Falken montieren kann...";
-			main.getMessage()[2] = "";
+			main.getMessage()[0]	= "";
+			main.getMessage()[1]	= "Achtung!";
+			main.getMessage()[3]	= "Ersatzteile dieser Sternenzerstörer verloren hat";
+			main.getMessage()[4]	= "R2D2 sie an den Millenium Falken montieren kann...";
+			main.getMessage()[2]	= "";
 			main.getYodaObj().setMessage(main.getMessage());
 			main.getYodaObj().setLevel(0);
 			main.setPaused(true);

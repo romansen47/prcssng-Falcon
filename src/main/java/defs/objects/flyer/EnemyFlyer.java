@@ -9,10 +9,10 @@ import temperature.Functions;
 
 public class EnemyFlyer extends Flyer {
 
-	final double AbsVel;
-	private int deltaX, acceleration;
-	private int[] force;
-	private double intelligence;
+	final double	AbsVel;
+	private int		deltaX, acceleration;
+	private int[]	force;
+	private double	intelligence;
 
 	public EnemyFlyer(Main main) {
 		super(main, (int) (main.Width / 2.0 - ((new Random()).nextInt()) % (main.Width / 6)), 200);
@@ -59,13 +59,13 @@ public class EnemyFlyer extends Flyer {
 		setX(getX() + (int) (Math.pow(getIntelligence(), 1) * getSpeedX()));
 		setAcceleration(main.getHanSolo().getX() - getX());
 		final double[] vec1 = new double[2], vec2 = new double[2];
-		vec1[0] = main.getHanSolo().getX();
-		vec1[1] = main.Height / 8;
-		vec2[0] = getX();
-		vec2[1] = getY();
-		double[] frc = Functions.getInstance().getMathOperator().AdditionOfVectors(vec1,
+		vec1[0]	= main.getHanSolo().getX();
+		vec1[1]	= main.Height / 8;
+		vec2[0]	= getX();
+		vec2[1]	= getY();
+		double[]		frc			= Functions.getInstance().getMathOperator().AdditionOfVectors(vec1,
 				Functions.getInstance().getMathOperator().ReversalOfVector(vec2));
-		final double tmpLength = Functions.getInstance().getMathOperator().MagnitudeOfVector(frc);
+		final double	tmpLength	= Functions.getInstance().getMathOperator().MagnitudeOfVector(frc);
 		if (tmpLength > 0.1) {
 			frc = Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
 					Functions.getInstance().getMathOperator().UnitVector(frc));

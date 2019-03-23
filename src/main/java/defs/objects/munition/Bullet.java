@@ -10,16 +10,16 @@ import temperature.Ball;
 
 public class Bullet extends Ball implements IDrawable {
 
-	private int Damage = 20;
-	private int size;
-	private final int speedX;
-	private int speedY;
+	private int			Damage	= 20;
+	private int			size;
+	private final int	speedX;
+	private int			speedY;
 
 	public Bullet(Main main, int x, int y, int speedX, int speedY) {
 		setX(x);
 		setY(y);
-		this.speedX = speedX;
-		this.speedY = speedY;
+		this.speedX	= speedX;
+		this.speedY	= speedY;
 		setSize(5 * main.Height / 1080);
 	}
 

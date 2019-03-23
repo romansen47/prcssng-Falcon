@@ -59,7 +59,8 @@ public class Main extends Gui {
 	private PImage BackGround;
 
 	/**
-	 * StarFghter or DeathStar as private instances
+	 * StarFghter or DeathStar as private
+	 * instances
 	 */
 	private IDrawable Boss;
 
@@ -69,8 +70,9 @@ public class Main extends Gui {
 	private int clicked;
 
 	/**
-	 * Container for the EnemyFlyer instances. These instances interact when they
-	 * collide
+	 * Container for the EnemyFlyer
+	 * instances. These instances interact
+	 * when they collide
 	 */
 	private EnemyFlyer[] Enemies;
 
@@ -105,7 +107,8 @@ public class Main extends Gui {
 	final public Minim mn = new Minim(this);
 
 	/**
-	 * Container for all objects that are drawn on a frame
+	 * Container for all objects that are
+	 * drawn on a frame
 	 */
 	private IDrawable[] objects;
 
@@ -145,8 +148,8 @@ public class Main extends Gui {
 		} else {
 			tmp = new EnemyFlyer[0];
 		}
-		Enemies = new EnemyFlyer[tmp.length + 1];
-		Enemies[0] = obj;
+		Enemies		= new EnemyFlyer[tmp.length + 1];
+		Enemies[0]	= obj;
 		for (int i = 0; i < tmp.length; i++) {
 			Enemies[i + 1] = tmp[i];
 		}
@@ -564,10 +567,10 @@ public class Main extends Gui {
 
 		BackGround = this.loadImage(Main.prefix + "space.jpg");
 
-		Enemies = new EnemyFlyer[0];
-		heart = this.loadShape(Main.prefix + "heartbeat.svg");
-		muni = this.loadShape(Main.prefix + "bullets.svg");
-		flyer = this.loadShape(Main.prefix + "tiefighter.svg");
+		Enemies	= new EnemyFlyer[0];
+		heart	= this.loadShape(Main.prefix + "heartbeat.svg");
+		muni	= this.loadShape(Main.prefix + "bullets.svg");
+		flyer	= this.loadShape(Main.prefix + "tiefighter.svg");
 		setHansolo(this.loadShape(Main.prefix + "milleniumFalcon.svg"));
 		setExplosion(this.loadShape(Main.prefix + "explosion.svg"));
 		stardestroyer = this.loadShape(Main.prefix + "StarDestroyer.svg");
@@ -604,12 +607,12 @@ public class Main extends Gui {
 		getPlayer().trigger();
 
 		setMessage(new String[6]);
-		getMessage()[0] = "";
-		getMessage()[1] = "Bald fertiggestellt der Todesstern";
-		getMessage()[2] = "sein wird, Han";
-		getMessage()[3] = "";
-		getMessage()[4] = "Zuvor vernichten ihn du musst";
-		getMessage()[5] = "Aufhalten das Imperium dich will";
+		getMessage()[0]	= "";
+		getMessage()[1]	= "Bald fertiggestellt der Todesstern";
+		getMessage()[2]	= "sein wird, Han";
+		getMessage()[3]	= "";
+		getMessage()[4]	= "Zuvor vernichten ihn du musst";
+		getMessage()[5]	= "Aufhalten das Imperium dich will";
 		setYodaObj(new Yoda(this, getMessage()));
 		add(getYodaObj());
 		// add(new DarthVaderFlyer(this));

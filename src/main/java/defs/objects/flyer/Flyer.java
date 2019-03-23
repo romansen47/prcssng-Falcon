@@ -17,9 +17,9 @@ public abstract class Flyer extends Ball implements IDrawable {
 	// private IShooting[] Guns;
 	private IShooting Gun;
 
-	private int health, shield;
-	private PImage image;
-	private int maxHealth = 60, maxShield = 100, maxMuni = 2000;
+	private int		health, shield;
+	private PImage	image;
+	private int		maxHealth	= 60, maxShield = 100, maxMuni = 2000;
 
 	private int muni = 2000;
 
@@ -34,8 +34,8 @@ public abstract class Flyer extends Ball implements IDrawable {
 		setGun(new PlainGunEnemy(this));
 		setHealth(maxHealth);
 		setShield(maxShield);
-		int tmpx, tmpy;
-		final int TMPX = getX(), TMPY = getY();
+		int			tmpx, tmpy;
+		final int	TMPX	= getX(), TMPY = getY();
 		if (getX() < main.Width / 2) {
 			tmpx = -100 * main.Width / 1920;
 		} else {

@@ -12,9 +12,9 @@ public class DeathStar extends StarDestroyer {
 		super(main);
 
 		main.setMessage(new String[3]);
-		main.getMessage()[0] = "";
-		main.getMessage()[1] = "Den Todesstern erreicht, du hast..";
-		main.getMessage()[2] = "";
+		main.getMessage()[0]	= "";
+		main.getMessage()[1]	= "Den Todesstern erreicht, du hast..";
+		main.getMessage()[2]	= "";
 		main.getYodaObj().setMessage(main.getMessage());
 		main.getYodaObj().setLevel(0);
 		main.setPaused(true);

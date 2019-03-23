@@ -7,8 +7,8 @@ import main.Main;
 
 public class PlainGun implements IShooting {
 
-	private Flyer flyer;
-	private int Verbrauch;
+	private Flyer	flyer;
+	private int		Verbrauch;
 
 	public PlainGun(Flyer fly) {
 		setFlyer(fly);

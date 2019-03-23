@@ -32,11 +32,11 @@ public class Benefit implements IDrawable {
 		if (Benefit.isFirstTime()) {
 			Benefit.setFirstTime(false);
 			main.setMessage(new String[5]);
-			main.getMessage()[0] = "";
-			main.getMessage()[1] = "Achtung!";
-			main.getMessage()[2] = "Ersatzteile verloren dieser Tie Fighter hat..";
-			main.getMessage()[3] = "Reperarieren den Millenium Falken du damit kannst!";
-			main.getMessage()[4] = "";
+			main.getMessage()[0]	= "";
+			main.getMessage()[1]	= "Achtung!";
+			main.getMessage()[2]	= "Ersatzteile verloren dieser Tie Fighter hat..";
+			main.getMessage()[3]	= "Reperarieren den Millenium Falken du damit kannst!";
+			main.getMessage()[4]	= "";
 			main.getYodaObj().setMessage(main.getMessage());
 			main.getYodaObj().setLevel(0);
 			main.setPaused(true);

@@ -7,7 +7,8 @@ public class SketchTemplate extends Gui {
 	/**
 	 * Replace main.SketchTemplate
 	 *
-	 * @param args Arguments delivered to PApplet
+	 * @param args Arguments delivered to
+	 *             PApplet
 	 */
 
 	public static void main(String[] args) {
@@ -23,7 +24,8 @@ public class SketchTemplate extends Gui {
 	}
 
 	/**
-	 * Use like a usual sketch in Processing IDE
+	 * Use like a usual sketch in Processing
+	 * IDE
 	 */
 
 	@Override

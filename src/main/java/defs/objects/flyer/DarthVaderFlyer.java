@@ -22,8 +22,8 @@ public class DarthVaderFlyer extends EnemyFlyer {
 		setY(100);
 		setSize(80 * main.Height / 1080);
 		setGun(new DoubleAimingGun(this));
-		int tmpx, tmpy;
-		final int TMPX = getX(), TMPY = getY();
+		int			tmpx, tmpy;
+		final int	TMPX	= getX(), TMPY = getY();
 		if (getX() < main.Width / 2) {
 			tmpx = -200 * main.Width / 1920;
 		} else {

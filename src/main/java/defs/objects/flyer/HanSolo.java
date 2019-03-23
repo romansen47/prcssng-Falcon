@@ -15,8 +15,8 @@ public final class HanSolo extends Flyer {
 	private int Score = 0;
 
 	public HanSolo(Main main) {
-		Guns = new IShooting[1];
-		Guns[0] = new PlainGun(this);
+		Guns	= new IShooting[1];
+		Guns[0]	= new PlainGun(this);
 		setGun(Guns[0]);
 		setSize(90 * main.Height / 1080);
 		setX(main.Width / 2);
@@ -31,8 +31,8 @@ public final class HanSolo extends Flyer {
 		for (int i = 0; i < Guns.length; i++) {
 			tmpGuns[i] = Guns[i];
 		}
-		tmpGuns[Guns.length] = gun;
-		Guns = tmpGuns;
+		tmpGuns[Guns.length]	= gun;
+		Guns					= tmpGuns;
 		setGun(gun);
 	}
 
@@ -82,8 +82,8 @@ public final class HanSolo extends Flyer {
 			main.add(new Explosion(main, getX(), getY()));
 		}
 		final double[] Mouse = new double[2];
-		Mouse[0] = main.mouseX;
-		Mouse[1] = main.mouseY;
+		Mouse[0]	= main.mouseX;
+		Mouse[1]	= main.mouseY;
 		setVelocity(Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
 				Functions.getInstance().getMathOperator().AdditionOfVectors(
 						Functions.getInstance().getMathOperator().ReversalOfVector(getPosition()), Mouse)));
