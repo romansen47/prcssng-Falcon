@@ -130,182 +130,179 @@ public class Main extends Gui {
 	private Yoda Yoda;
 
 	public void add(IDrawable obj) {
-		final IDrawable[] tmp = this.getObjects().clone();
-		this.setObjects(new IDrawable[tmp.length + 1]);
-		this.getObjects()[0] = obj;
+		final IDrawable[] tmp = getObjects().clone();
+		setObjects(new IDrawable[tmp.length + 1]);
+		getObjects()[0] = obj;
 		for (int i = 0; i < tmp.length; i++) {
-			this.getObjects()[i + 1] = tmp[i];
+			getObjects()[i + 1] = tmp[i];
 		}
 	}
 
 	public void addEnemy(EnemyFlyer obj) {
 		EnemyFlyer[] tmp;
-		if (this.Enemies != null && this.Enemies.length > 0) {
-			tmp = this.Enemies.clone();
+		if (Enemies != null && Enemies.length > 0) {
+			tmp = Enemies.clone();
 		} else {
 			tmp = new EnemyFlyer[0];
 		}
-		this.Enemies = new EnemyFlyer[tmp.length + 1];
-		this.Enemies[0] = obj;
+		Enemies = new EnemyFlyer[tmp.length + 1];
+		Enemies[0] = obj;
 		for (int i = 0; i < tmp.length; i++) {
-			this.Enemies[i + 1] = tmp[i];
+			Enemies[i + 1] = tmp[i];
 		}
 		Main.getStatistic().setEnemies(Main.getStatistic().getEnemies() + 1);
 	}
 
 	public void addOnTop(IDrawable obj) {
-		final IDrawable[] tmp = this.getObjects().clone();
-		this.setObjects(new IDrawable[tmp.length + 1]);
+		final IDrawable[] tmp = getObjects().clone();
+		setObjects(new IDrawable[tmp.length + 1]);
 		for (int i = 0; i < tmp.length; i++) {
-			this.getObjects()[i] = tmp[i];
+			getObjects()[i] = tmp[i];
 		}
-		this.getObjects()[tmp.length] = obj;
+		getObjects()[tmp.length] = obj;
 	}
 
 	public void createBoss() {
-		if (this.getFrameCount() == 1500 && this.getBoss() == null) {
-			this.add(new StarDestroyer(this));
+		if (getFrameCount() == 1500 && getBoss() == null) {
+			add(new StarDestroyer(this));
 		}
-		if (this.getFrameCount() == 3000) {
-			if (this.getBoss() == null) {
-				this.add(new SecondStarDestroyer(this));
+		if (getFrameCount() == 3000) {
+			if (getBoss() == null) {
+				add(new SecondStarDestroyer(this));
 			} else {
-				this.setFrameCount(1501);
+				setFrameCount(1501);
 			}
 		}
-		if (this.getFrameCount() == 4500) {
-			if (this.getBoss() == null) {
-				this.add(new ThirdStarDestroyer(this));
+		if (getFrameCount() == 4500) {
+			if (getBoss() == null) {
+				add(new ThirdStarDestroyer(this));
 			} else {
-				this.setFrameCount(3001);
+				setFrameCount(3001);
 			}
 		}
-		if (this.getFrameCount() == 6000) {
-			if (this.getBoss() == null) {
-				this.add(new ForthStarDestroyer(this));
+		if (getFrameCount() == 6000) {
+			if (getBoss() == null) {
+				add(new ForthStarDestroyer(this));
 			} else {
-				this.setFrameCount(4501);
+				setFrameCount(4501);
 			}
 		}
-		if (this.getFrameCount() == 7500) {
-			if (this.getBoss() == null) {
-				this.add(new DeathStar(this));
+		if (getFrameCount() == 7500) {
+			if (getBoss() == null) {
+				add(new DeathStar(this));
 			} else {
-				this.setFrameCount(6001);
+				setFrameCount(6001);
 			}
 		}
 	}
 
 	public void createRandomObjects() {
-		if ((new Random()).nextInt(1000) > 950 - this.getLevel()) {
+		if ((new Random()).nextInt(1000) > 950 - getLevel()) {
 			final EnemyFlyer tmp = new EnemyFlyer(this);
-			if (this.getBoss() != null) {
+			if (getBoss() != null) {
 				if ((new Random()).nextBoolean()) {
 					tmp.setX(150 + (new Random()).nextInt(50));
 				} else {
-					tmp.setX(this.Width - 200 - (new Random()).nextInt(50));
+					tmp.setX(Width - 200 - (new Random()).nextInt(50));
 				}
 			}
-			this.addOnTop(tmp);
-			this.addEnemy(tmp);
+			addOnTop(tmp);
+			addEnemy(tmp);
 		}
-		if ((new Random()).nextInt(1000) > 995 - this.getLevel() * 5) {
-			if (this.getBoss() == null) {
+		if ((new Random()).nextInt(1000) > 995 - getLevel() * 5) {
+			if (getBoss() == null) {
 				final Asteroid tmp = new Asteroid(this);
-				this.addOnTop(tmp);
+				addOnTop(tmp);
 			}
 		}
 	}
 
 	@Override
 	public void draw() {
-		this.image(this.BackGround, 0, 0, this.width, this.height);
+		this.image(BackGround, 0, 0, width, height);
 
-		if (!this.paused) {
+		if (!paused) {
 
-			this.setFrameCount(this.getFrameCount() + 1);
+			setFrameCount(getFrameCount() + 1);
 
-			this.HealHanSolo();
-			this.createBoss();
-			this.createRandomObjects();
-			this.drawInformation();
+			HealHanSolo();
+			createBoss();
+			createRandomObjects();
+			drawInformation();
 
-			this.setClicked(this.clicked());
-			for (final IDrawable obj : this.getObjects()) {
+			setClicked(clicked());
+			for (final IDrawable obj : getObjects()) {
 				obj.move(this);
 				obj.draw(this);
 			}
 		} else {
-			this.getYodaObj().move(this);
+			getYodaObj().move(this);
 		}
-		final Ball[] tmpPositions = getFunctions().collision(this.Enemies, 1);
-		for (int i = 0; i < this.Enemies.length; i++) {
-			this.Enemies[i].setX(((int) (tmpPositions[i].getPosition()[0])));
-			this.Enemies[i].setY(((int) (tmpPositions[i].getPosition()[1])));
-			this.Enemies[i].setSpeedX(tmpPositions[i].getVelocity()[0]);
-			this.Enemies[i].setSpeedY(tmpPositions[i].getVelocity()[1]);
+		final Ball[] tmpPositions = getFunctions().collision(Enemies, 1);
+		for (int i = 0; i < Enemies.length; i++) {
+			Enemies[i].setX(((int) (tmpPositions[i].getPosition()[0])));
+			Enemies[i].setY(((int) (tmpPositions[i].getPosition()[1])));
+			Enemies[i].setSpeedX(tmpPositions[i].getVelocity()[0]);
+			Enemies[i].setSpeedY(tmpPositions[i].getVelocity()[1]);
 		}
 
 		// setEnemies((EnemyFlyer[])();
 	}
 
 	public void drawInformation() {
-		this.fill(
-				255 * (100 - ((HanSolo) this.getHanSolo()).getHealth())
-						/ (float) ((HanSolo) this.getHanSolo()).getMaxHealth(),
-				255 * ((HanSolo) this.getHanSolo()).getHealth() / (float) ((HanSolo) this.getHanSolo()).getMaxHealth(),
-				0);
-		this.rect(30, 30, (this.Width / 3.0f) * ((HanSolo) this.getHanSolo()).getHealth()
-				/ ((HanSolo) this.getHanSolo()).getMaxHealth(), 30);
-		this.shape(this.heart, 40, 30, 30, 30);
+		this.fill(255 * (100 - ((HanSolo) getHanSolo()).getHealth()) / (float) ((HanSolo) getHanSolo()).getMaxHealth(),
+				255 * ((HanSolo) getHanSolo()).getHealth() / (float) ((HanSolo) getHanSolo()).getMaxHealth(), 0);
+		this.rect(30, 30,
+				(Width / 3.0f) * ((HanSolo) getHanSolo()).getHealth() / ((HanSolo) getHanSolo()).getMaxHealth(), 30);
+		this.shape(heart, 40, 30, 30, 30);
 
 		this.fill(0, 0, 255);
-		this.rect(30, 80, (this.Width / 3.0f) * ((HanSolo) this.getHanSolo()).getMuni()
-				/ ((HanSolo) this.getHanSolo()).getMaxMuni(), 30);
-		this.shape(this.muni, 40, 80, 30, 30);
+		this.rect(30, 80, (Width / 3.0f) * ((HanSolo) getHanSolo()).getMuni() / ((HanSolo) getHanSolo()).getMaxMuni(),
+				30);
+		this.shape(muni, 40, 80, 30, 30);
 
 		this.fill(0, 255, 255);
-		this.rect(this.Width - (float) 300, 30, 280, 60, 25);
-		this.textSize(30);
+		this.rect(Width - (float) 300, 30, 280, 60, 25);
+		textSize(30);
 		this.fill(0);
-		this.text("Score: " + ((HanSolo) (this.getHanSolo())).getScore(), this.Width - (float) 260, 80);
+		this.text("Score: " + ((HanSolo) (getHanSolo())).getScore(), Width - (float) 260, 80);
 	}
 
 	public PShape getAsteroid() {
-		return this.asteroid;
+		return asteroid;
 	}
 
 	public PShape getBenefit() {
-		return this.benefit;
+		return benefit;
 	}
 
 	public IDrawable getBoss() {
-		return this.Boss;
+		return Boss;
 	}
 
 	public AudioSample getChewBacca() {
-		return this.ChewBacca;
+		return ChewBacca;
 	}
 
 	public int getClicked() {
-		return this.clicked;
+		return clicked;
 	}
 
 	public PShape getDarth() {
-		return this.darth;
+		return darth;
 	}
 
 	public PShape getDeathStar() {
-		return this.deathStar;
+		return deathStar;
 	}
 
 	public EnemyFlyer[] getEnemies() {
-		return this.Enemies;
+		return Enemies;
 	}
 
 	public int getEnemyIndex(Flyer element) {
-		for (int i = 0; i < this.Enemies.length; i++) {
-			if (this.Enemies[i] == element) {
+		for (int i = 0; i < Enemies.length; i++) {
+			if (Enemies[i] == element) {
 				return i;
 			}
 		}
@@ -313,36 +310,36 @@ public class Main extends Gui {
 	}
 
 	public PShape getExplosion() {
-		return this.explosion;
+		return explosion;
 	}
 
 	public AudioSample getExplosionSound() {
-		return this.ExplosionSound;
+		return ExplosionSound;
 	}
 
 	public PShape getFlyer() {
-		return this.flyer;
+		return flyer;
 	}
 
 	public int getFrameCount() {
-		return this.frameCount;
+		return frameCount;
 	}
 
 	public AudioSample getHan() {
-		return this.han;
+		return han;
 	}
 
 	public PShape getHansolo() {
-		return this.hansolo;
+		return hansolo;
 	}
 
 	public IDrawable getHanSolo() {
-		return this.HanSolo;
+		return HanSolo;
 	}
 
 	public int getIndex(IDrawable element) {
-		for (int i = 0; i < this.getObjects().length; i++) {
-			if (this.getObjects()[i] == element) {
+		for (int i = 0; i < getObjects().length; i++) {
+			if (getObjects()[i] == element) {
 				return i;
 			}
 		}
@@ -350,105 +347,105 @@ public class Main extends Gui {
 	}
 
 	public int getLevel() {
-		return this.level;
+		return level;
 	}
 
 	public String[] getMessage() {
-		return this.message;
+		return message;
 	}
 
 	public IDrawable[] getObjects() {
-		return this.objects;
+		return objects;
 	}
 
 	public AudioSample getPlainGunSound() {
-		return this.PlainGunSound;
+		return PlainGunSound;
 	}
 
 	public AudioSample getPlayer() {
-		return this.player;
+		return player;
 	}
 
 	public int getScore() {
-		return this.Score;
+		return Score;
 	}
 
 	public PShape getStardestroyer() {
-		return this.stardestroyer;
+		return stardestroyer;
 	}
 
 	public AudioSample getVader() {
-		return this.Vader;
+		return Vader;
 	}
 
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return this.Width;
+		return Width;
 	}
 
 	public PShape getYoda() {
-		return this.yoda;
+		return yoda;
 	}
 
 	public AudioSample getYodaLaughter() {
-		return this.yodaLaughter;
+		return yodaLaughter;
 	}
 
 	public Yoda getYodaObj() {
-		return this.Yoda;
+		return Yoda;
 	}
 
 	public void HealHanSolo() {
-		if (this.getFrameCount() == 1) {
-			this.getHan().trigger();
+		if (getFrameCount() == 1) {
+			getHan().trigger();
 		}
-		if (this.getFrameCount() % 80 == 0) {
-			((HanSolo) this.getHanSolo()).setHealth(((HanSolo) this.getHanSolo()).getHealth() + 1);
-			((HanSolo) this.getHanSolo()).setMuni(((HanSolo) this.getHanSolo()).getMuni() + 10);
+		if (getFrameCount() % 80 == 0) {
+			((HanSolo) getHanSolo()).setHealth(((HanSolo) getHanSolo()).getHealth() + 1);
+			((HanSolo) getHanSolo()).setMuni(((HanSolo) getHanSolo()).getMuni() + 10);
 		}
 	}
 
 	public boolean isPaused() {
-		return this.paused;
+		return paused;
 	}
 
 	@Override
 	public void mouseWheel(MouseEvent event) {
 		final float e = event.getCount();
 		if (e > 0) {
-			((HanSolo) this.getHanSolo()).nextGun();
+			((HanSolo) getHanSolo()).nextGun();
 		} else {
-			((HanSolo) this.getHanSolo()).prevGun();
+			((HanSolo) getHanSolo()).prevGun();
 		}
 	}
 
 	public void remove(IDrawable obj) {
-		this.remove(this.getIndex(obj));
+		this.remove(getIndex(obj));
 	}
 
 	public void remove(int pos) {
-		if (this.getObjects().length > 0 && pos >= 0) {
-			final IDrawable[] tmpElements = new IDrawable[this.getObjects().length - 1];
+		if (getObjects().length > 0 && pos >= 0) {
+			final IDrawable[] tmpElements = new IDrawable[getObjects().length - 1];
 			for (int i = 0; i < pos; i++) {
-				tmpElements[i] = this.getObjects()[i];
+				tmpElements[i] = getObjects()[i];
 			}
-			for (int i = pos; i < this.getObjects().length - 1; i++) {
-				tmpElements[i] = this.getObjects()[i + 1];
+			for (int i = pos; i < getObjects().length - 1; i++) {
+				tmpElements[i] = getObjects()[i + 1];
 			}
-			this.setObjects(tmpElements);
+			setObjects(tmpElements);
 		}
 	}
 
 	public void removeEnemy(int pos) {
-		if (this.Enemies.length > 0 && pos >= 0) {
-			final EnemyFlyer[] tmpEnemies = new EnemyFlyer[this.Enemies.length - 1];
+		if (Enemies.length > 0 && pos >= 0) {
+			final EnemyFlyer[] tmpEnemies = new EnemyFlyer[Enemies.length - 1];
 			for (int i = 0; i < pos; i++) {
-				tmpEnemies[i] = this.Enemies[i];
+				tmpEnemies[i] = Enemies[i];
 			}
-			for (int i = pos; i < this.Enemies.length - 1; i++) {
-				tmpEnemies[i] = this.Enemies[i + 1];
+			for (int i = pos; i < Enemies.length - 1; i++) {
+				tmpEnemies[i] = Enemies[i + 1];
 			}
-			this.Enemies = tmpEnemies;
+			Enemies = tmpEnemies;
 		}
 	}
 
@@ -461,11 +458,11 @@ public class Main extends Gui {
 	}
 
 	public void setBoss(IDrawable boss) {
-		this.Boss = boss;
+		Boss = boss;
 	}
 
 	public void setChewBacca(AudioSample chewBacca) {
-		this.ChewBacca = chewBacca;
+		ChewBacca = chewBacca;
 	}
 
 	public void setClicked(int clicked) {
@@ -481,7 +478,7 @@ public class Main extends Gui {
 	}
 
 	public void setEnemies(EnemyFlyer[] enemies) {
-		this.Enemies = enemies;
+		Enemies = enemies;
 	}
 
 	public void setExplosion(PShape explosion) {
@@ -489,7 +486,7 @@ public class Main extends Gui {
 	}
 
 	public void setExplosionSound(AudioSample explosionSound) {
-		this.ExplosionSound = explosionSound;
+		ExplosionSound = explosionSound;
 	}
 
 	public void setFlyer(PShape flyer) {
@@ -509,7 +506,7 @@ public class Main extends Gui {
 	}
 
 	public void setHanSolo(IDrawable hanSolo) {
-		this.HanSolo = hanSolo;
+		HanSolo = hanSolo;
 	}
 
 	public void setLevel(int level) {
@@ -529,7 +526,7 @@ public class Main extends Gui {
 	}
 
 	public void setPlainGunSound(AudioSample plainGunSound) {
-		this.PlainGunSound = plainGunSound;
+		PlainGunSound = plainGunSound;
 	}
 
 	public void setPlayer(AudioSample player) {
@@ -537,7 +534,7 @@ public class Main extends Gui {
 	}
 
 	public void setScore(int score) {
-		this.Score = score;
+		Score = score;
 	}
 
 	public void setStardestroyer(PShape stardestroyer) {
@@ -547,16 +544,16 @@ public class Main extends Gui {
 	@Override
 	public void settings() {
 		this.fullScreen(PConstants.P3D, 2);
-		this.frameRate = 30;
+		frameRate = 30;
 	}
 
 	@Override
 	public void setup() {
 
 		// frameRate=30;
-		this.strokeWeight(3);
+		strokeWeight(3);
 		this.stroke(0, 0, 0);
-		this.noCursor();
+		noCursor();
 		if (OSValidator.isUnix() || OSValidator.isMac()) {
 			Main.prefix = "/tmp/data/";
 		} else {
@@ -565,56 +562,56 @@ public class Main extends Gui {
 
 		Main.prefix = "data/";
 
-		this.BackGround = this.loadImage(Main.prefix + "space.jpg");
+		BackGround = this.loadImage(Main.prefix + "space.jpg");
 
-		this.Enemies = new EnemyFlyer[0];
-		this.heart = this.loadShape(Main.prefix + "heartbeat.svg");
-		this.muni = this.loadShape(Main.prefix + "bullets.svg");
-		this.flyer = this.loadShape(Main.prefix + "tiefighter.svg");
-		this.setHansolo(this.loadShape(Main.prefix + "milleniumFalcon.svg"));
-		this.setExplosion(this.loadShape(Main.prefix + "explosion.svg"));
-		this.stardestroyer = this.loadShape(Main.prefix + "StarDestroyer.svg");
-		this.setDeathStar(this.loadShape(Main.prefix + "deathStar.svg"));
-		this.benefit = this.loadShape(Main.prefix + "energy.svg");
-		this.setAsteroid(this.loadShape(Main.prefix + "ast1.svg"));
-		this.setYoda(this.loadShape(Main.prefix + "yoda.svg"));
-		this.setDarth(this.loadShape(Main.prefix + "vader.svg"));
+		Enemies = new EnemyFlyer[0];
+		heart = this.loadShape(Main.prefix + "heartbeat.svg");
+		muni = this.loadShape(Main.prefix + "bullets.svg");
+		flyer = this.loadShape(Main.prefix + "tiefighter.svg");
+		setHansolo(this.loadShape(Main.prefix + "milleniumFalcon.svg"));
+		setExplosion(this.loadShape(Main.prefix + "explosion.svg"));
+		stardestroyer = this.loadShape(Main.prefix + "StarDestroyer.svg");
+		setDeathStar(this.loadShape(Main.prefix + "deathStar.svg"));
+		benefit = this.loadShape(Main.prefix + "energy.svg");
+		setAsteroid(this.loadShape(Main.prefix + "ast1.svg"));
+		setYoda(this.loadShape(Main.prefix + "yoda.svg"));
+		setDarth(this.loadShape(Main.prefix + "vader.svg"));
 
 		Main.prefix = "";
 		try {
-			this.setPlainGunSound(this.mn.loadSample(this.sketchPath(Main.prefix + "laser.mp3")));
-			this.setExplosionSound(this.mn.loadSample(this.sketchPath(Main.prefix + "explosion.mp3")));
-			this.setChewBacca(this.mn.loadSample(this.sketchPath(Main.prefix + "chewbacca.wav")));
-			this.setHan(this.mn.loadSample(this.sketchPath(Main.prefix + "han.mp3")));
-			this.setVader(this.mn.loadSample(this.sketchPath(Main.prefix + "Vader.mp3")));
-			this.setYodaLaughter(this.mn.loadSample(this.sketchPath(Main.prefix + "YodaLaughter.mp3")));
-			this.setPlayer(this.mn.loadSample(this.sketchPath(Main.prefix + "Theme.mp3")));
+			setPlainGunSound(mn.loadSample(this.sketchPath(Main.prefix + "laser.mp3")));
+			setExplosionSound(mn.loadSample(this.sketchPath(Main.prefix + "explosion.mp3")));
+			setChewBacca(mn.loadSample(this.sketchPath(Main.prefix + "chewbacca.wav")));
+			setHan(mn.loadSample(this.sketchPath(Main.prefix + "han.mp3")));
+			setVader(mn.loadSample(this.sketchPath(Main.prefix + "Vader.mp3")));
+			setYodaLaughter(mn.loadSample(this.sketchPath(Main.prefix + "YodaLaughter.mp3")));
+			setPlayer(mn.loadSample(this.sketchPath(Main.prefix + "Theme.mp3")));
 		} catch (final NullPointerException npe) {
 			System.out.println("falscher Ordner!");
 		} finally {
 			Main.prefix = "./data/";
-			this.setPlainGunSound(this.mn.loadSample(this.sketchPath(Main.prefix + "laser.mp3")));
-			this.setExplosionSound(this.mn.loadSample(this.sketchPath(Main.prefix + "explosion.mp3")));
-			this.setChewBacca(this.mn.loadSample(this.sketchPath(Main.prefix + "chewbacca.wav")));
-			this.setHan(this.mn.loadSample(this.sketchPath(Main.prefix + "han.mp3")));
-			this.setVader(this.mn.loadSample(this.sketchPath(Main.prefix + "Vader.mp3")));
-			this.setYodaLaughter(this.mn.loadSample(this.sketchPath(Main.prefix + "YodaLaughter.mp3")));
-			this.setPlayer(this.mn.loadSample(this.sketchPath(Main.prefix + "Theme.mp3")));
+			setPlainGunSound(mn.loadSample(this.sketchPath(Main.prefix + "laser.mp3")));
+			setExplosionSound(mn.loadSample(this.sketchPath(Main.prefix + "explosion.mp3")));
+			setChewBacca(mn.loadSample(this.sketchPath(Main.prefix + "chewbacca.wav")));
+			setHan(mn.loadSample(this.sketchPath(Main.prefix + "han.mp3")));
+			setVader(mn.loadSample(this.sketchPath(Main.prefix + "Vader.mp3")));
+			setYodaLaughter(mn.loadSample(this.sketchPath(Main.prefix + "YodaLaughter.mp3")));
+			setPlayer(mn.loadSample(this.sketchPath(Main.prefix + "Theme.mp3")));
 		}
-		this.setObjects(new IDrawable[0]);
-		this.setHanSolo(new HanSolo(this));
-		this.add(this.getHanSolo());
-		this.getPlayer().trigger();
+		setObjects(new IDrawable[0]);
+		setHanSolo(new HanSolo(this));
+		add(getHanSolo());
+		getPlayer().trigger();
 
-		this.setMessage(new String[6]);
-		this.getMessage()[0] = "";
-		this.getMessage()[1] = "Bald fertiggestellt der Todesstern";
-		this.getMessage()[2] = "sein wird, Han";
-		this.getMessage()[3] = "";
-		this.getMessage()[4] = "Zuvor vernichten ihn du musst";
-		this.getMessage()[5] = "Aufhalten das Imperium dich will";
-		this.setYodaObj(new Yoda(this, this.getMessage()));
-		this.add(this.getYodaObj());
+		setMessage(new String[6]);
+		getMessage()[0] = "";
+		getMessage()[1] = "Bald fertiggestellt der Todesstern";
+		getMessage()[2] = "sein wird, Han";
+		getMessage()[3] = "";
+		getMessage()[4] = "Zuvor vernichten ihn du musst";
+		getMessage()[5] = "Aufhalten das Imperium dich will";
+		setYodaObj(new Yoda(this, getMessage()));
+		add(getYodaObj());
 		// add(new DarthVaderFlyer(this));
 		// this.setBoss(this.getObjects()[0]);
 		// addEnemy((EnemyFlyer)this.getBoss());
@@ -622,7 +619,7 @@ public class Main extends Gui {
 	}
 
 	public void setVader(AudioSample vader) {
-		this.Vader = vader;
+		Vader = vader;
 	}
 
 	public void setYoda(PShape yoda) {
@@ -634,7 +631,7 @@ public class Main extends Gui {
 	}
 
 	public void setYodaObj(Yoda yoda) {
-		this.Yoda = yoda;
+		Yoda = yoda;
 	}
 
 	/**

@@ -16,31 +16,31 @@ public class StatsCollector {
 	private int shots, missed, enemies, kills;
 
 	private StatsCollector() {
-		this.setShots(0);
-		this.setMissed(0);
-		this.setEnemies(0);
-		this.setKills(0);
-		this.setPerfectGame(true);
+		setShots(0);
+		setMissed(0);
+		setEnemies(0);
+		setKills(0);
+		setPerfectGame(true);
 	}
 
 	public int getEnemies() {
-		return this.enemies;
+		return enemies;
 	}
 
 	public int getKills() {
-		return this.kills;
+		return kills;
 	}
 
 	public int getMissed() {
-		return this.missed;
+		return missed;
 	}
 
 	public int getShots() {
-		return this.shots;
+		return shots;
 	}
 
 	public boolean isPerfectGame() {
-		return this.perfectGame;
+		return perfectGame;
 	}
 
 	public void setEnemies(int enemies) {

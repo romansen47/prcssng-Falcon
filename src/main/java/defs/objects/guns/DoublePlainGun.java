@@ -8,17 +8,16 @@ public class DoublePlainGun extends PlainGun {
 
 	public DoublePlainGun(Flyer fly) {
 		super(fly);
-		this.setVerbrauch(6);
+		setVerbrauch(6);
 	}
 
 	@Override
 	public void shoot(Main main) {
+		main.add(new Bullet(main, getFlyer().getX() - (int) (0.5 * getFlyer().getSize()) + getFlyer().getSize() / 3,
+				getFlyer().getY() - 20, (int) getFlyer().getSpeedX(), 20));
 		main.add(new Bullet(main,
-				this.getFlyer().getX() - (int) (0.5 * this.getFlyer().getSize()) + this.getFlyer().getSize() / 3,
-				this.getFlyer().getY() - 20, (int) this.getFlyer().getSpeedX(), 20));
-		main.add(new Bullet(main,
-				this.getFlyer().getX() - (int) (0.5 * this.getFlyer().getSize()) + 2 * (this.getFlyer().getSize() / 3),
-				this.getFlyer().getY() - 20, (int) this.getFlyer().getSpeedX(), 20));
+				getFlyer().getX() - (int) (0.5 * getFlyer().getSize()) + 2 * (getFlyer().getSize() / 3),
+				getFlyer().getY() - 20, (int) getFlyer().getSpeedX(), 20));
 		main.getPlainGunSound().trigger();
 	}
 }

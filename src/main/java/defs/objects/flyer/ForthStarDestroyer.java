@@ -12,16 +12,15 @@ public class ForthStarDestroyer extends StarDestroyer {
 
 	@Override
 	public void gotHit(Main main, int hit) {
-		this.setHealth(this.getHealth() - 2 * hit);
-		if (this.getHealth() < 1) {
-			main.add(
-					new Explosion(main, this.getX() + (int) (0.5 * this.getSize()), this.getY() + this.getSize() + 10));
+		setHealth(getHealth() - 2 * hit);
+		if (getHealth() < 1) {
+			main.add(new Explosion(main, getX() + (int) (0.5 * getSize()), getY() + getSize() + 10));
 			main.setLevel(main.getLevel() + 1);
 			main.setBoss(null);
 
-			new SimpleCombiGunBenefit(main, this.getX(), this.getY(), 100, 2000);
+			new SimpleCombiGunBenefit(main, getX(), getY(), 100, 2000);
 			main.getChewBacca().trigger();
-			this.selfDestroy(main);
+			selfDestroy(main);
 		}
 	}
 

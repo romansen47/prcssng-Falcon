@@ -15,55 +15,54 @@ public final class HanSolo extends Flyer {
 	private int Score = 0;
 
 	public HanSolo(Main main) {
-		this.Guns = new IShooting[1];
-		this.Guns[0] = new PlainGun(this);
-		this.setGun(this.Guns[0]);
-		this.setSize(90 * main.Height / 1080);
-		this.setX(main.Width / 2);
-		this.setY(main.Height - ((int) (1.5 * this.getSize())));
-		this.setMaxHealth(400);
-		this.setHealth(400);
-		this.setMaxMuni(2000);
+		Guns = new IShooting[1];
+		Guns[0] = new PlainGun(this);
+		setGun(Guns[0]);
+		setSize(90 * main.Height / 1080);
+		setX(main.Width / 2);
+		setY(main.Height - ((int) (1.5 * getSize())));
+		setMaxHealth(400);
+		setHealth(400);
+		setMaxMuni(2000);
 	}
 
 	public void addGun(IShooting gun) {
-		final IShooting[] tmpGuns = new IShooting[this.Guns.length + 1];
-		for (int i = 0; i < this.Guns.length; i++) {
-			tmpGuns[i] = this.Guns[i];
+		final IShooting[] tmpGuns = new IShooting[Guns.length + 1];
+		for (int i = 0; i < Guns.length; i++) {
+			tmpGuns[i] = Guns[i];
 		}
-		tmpGuns[this.Guns.length] = gun;
-		this.Guns = tmpGuns;
-		this.setGun(gun);
+		tmpGuns[Guns.length] = gun;
+		Guns = tmpGuns;
+		setGun(gun);
 	}
 
 	public void addScore(int n) {
-		this.Score = Math.max(0, this.Score + n);
+		Score = Math.max(0, Score + n);
 	}
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getHansolo(), this.getX() - (int) (0.5 * this.getSize()),
-				this.getY() - ((int) (0.5 * this.getSize())), this.getSize(), this.getSize());
+		main.shape(main.getHansolo(), getX() - (int) (0.5 * getSize()), getY() - ((int) (0.5 * getSize())), getSize(),
+				getSize());
 	}
 
 	public int getScore() {
-		return this.Score;
+		return Score;
 	}
 
 	@Override
 	public void gotHit(Main main, int hit) {
-		this.setHealth(this.getHealth() - hit);
-		if (this.getHealth() < 1) {
-			main.setScore(this.getScore());
-			main.add(new FinalExplosion(main, this.getX() + (int) (0.5 * this.getSize()),
-					this.getY() + (int) (0.0 * this.getSize())));
+		setHealth(getHealth() - hit);
+		if (getHealth() < 1) {
+			main.setScore(getScore());
+			main.add(new FinalExplosion(main, getX() + (int) (0.5 * getSize()), getY() + (int) (0.0 * getSize())));
 			main.remove(this);
 		}
 	}
 
 	private int indexGun() {
-		for (int i = 0; i < this.Guns.length; i++) {
-			if (this.getGun() == this.Guns[i]) {
+		for (int i = 0; i < Guns.length; i++) {
+			if (getGun() == Guns[i]) {
 				return i;
 			}
 		}
@@ -72,53 +71,53 @@ public final class HanSolo extends Flyer {
 
 	@Override
 	public void move() {
-		this.setX((int) (this.getX() + this.getVelocity()[0]));
-		this.setY((int) (this.getY() + this.getVelocity()[1]));
+		setX((int) (getX() + getVelocity()[0]));
+		setY((int) (getY() + getVelocity()[1]));
 	}
 
 	@Override
 	public void move(Main main) {
-		if (this.getHealth() < 0) {
+		if (getHealth() < 0) {
 			main.remove(this);
-			main.add(new Explosion(main, this.getX(), this.getY()));
+			main.add(new Explosion(main, getX(), getY()));
 		}
 		final double[] Mouse = new double[2];
 		Mouse[0] = main.mouseX;
 		Mouse[1] = main.mouseY;
-		this.setVelocity(Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
+		setVelocity(Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
 				Functions.getInstance().getMathOperator().AdditionOfVectors(
-						Functions.getInstance().getMathOperator().ReversalOfVector(this.getPosition()), Mouse)));
+						Functions.getInstance().getMathOperator().ReversalOfVector(getPosition()), Mouse)));
 
 		if (main.getFrameCount() % 4 == 0 && (main.mousePressed && main.mouseButton == PConstants.LEFT)) {
-			this.shoot(main);
+			shoot(main);
 			Main.getStatistic().setShots(Main.getStatistic().getShots() + 1);
 		}
-		if (this.getY() > main.Height) {
-			this.selfDestroy(main);
+		if (getY() > main.Height) {
+			selfDestroy(main);
 			Main.getStatistic().setPerfectGame(false);
 		}
 		this.move();
 	}
 
 	public void nextGun() {
-		final int n = this.indexGun();
-		if (n == this.Guns.length - 1) {
-			this.setGun(this.Guns[0]);
+		final int n = indexGun();
+		if (n == Guns.length - 1) {
+			setGun(Guns[0]);
 		} else {
-			this.setGun(this.Guns[n + 1]);
+			setGun(Guns[n + 1]);
 		}
 	}
 
 	public void prevGun() {
-		final int n = this.indexGun();
+		final int n = indexGun();
 		if (n == 0) {
-			this.setGun(this.Guns[this.Guns.length - 1]);
+			setGun(Guns[Guns.length - 1]);
 		} else {
-			this.setGun(this.Guns[n - 1]);
+			setGun(Guns[n - 1]);
 		}
 	}
 
 	public void setScore(int n) {
-		this.Score = Math.min(0, n);
+		Score = Math.min(0, n);
 	}
 }

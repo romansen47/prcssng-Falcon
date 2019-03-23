@@ -23,11 +23,11 @@ public class Benefit implements IDrawable {
 	private int X, Y, size;
 
 	public Benefit(Main main, int x, int y, int size, int health) {
-		this.setX(x);
-		this.setY(y);
-		this.setSize(size * main.Height / 1080);
-		this.setMaxhealth(health);
-		this.setHealth(health);
+		setX(x);
+		setY(y);
+		setSize(size * main.Height / 1080);
+		setMaxhealth(health);
+		setHealth(health);
 		main.addOnTop(this);
 		if (Benefit.isFirstTime()) {
 			Benefit.setFirstTime(false);
@@ -45,20 +45,19 @@ public class Benefit implements IDrawable {
 
 	@Override
 	public void draw(Main main) {
-		main.shape(main.getBenefit(), this.getX() - ((int) (0.5 * this.getSize())),
-				this.getY() - ((int) (0.5 * this.getSize()) - 20), this.getSize(), this.getSize());
-		main.fill(255 * (this.getMaxhealth() - this.getHealth()) / this.getMaxhealth(),
-				255 * this.getHealth() / this.getMaxhealth(), 0);
-		main.rect(this.getX() - ((int) (0.5 * this.getSize())), this.getY() - ((int) (0.5 * this.getSize())) - 10,
-				(int) (1. * this.getHealth() / this.getMaxhealth() * this.getSize()), 8, 50);
+		main.shape(main.getBenefit(), getX() - ((int) (0.5 * getSize())), getY() - ((int) (0.5 * getSize()) - 20),
+				getSize(), getSize());
+		main.fill(255 * (getMaxhealth() - getHealth()) / getMaxhealth(), 255 * getHealth() / getMaxhealth(), 0);
+		main.rect(getX() - ((int) (0.5 * getSize())), getY() - ((int) (0.5 * getSize())) - 10,
+				(int) (1. * getHealth() / getMaxhealth() * getSize()), 8, 50);
 	}
 
 	public int getHealth() {
-		return this.health;
+		return health;
 	}
 
 	public int getMaxhealth() {
-		return this.maxhealth;
+		return maxhealth;
 	}
 
 	@Override
@@ -69,34 +68,33 @@ public class Benefit implements IDrawable {
 
 	@Override
 	public int getSize() {
-		return this.size;
+		return size;
 	}
 
 	@Override
 	public int getX() {
-		return this.X;
+		return X;
 	}
 
 	@Override
 	public int getY() {
-		return this.Y;
+		return Y;
 	}
 
 	@Override
 	public void gotHit(Main main, int i) {
-		this.setHealth(Math.max(0, this.getHealth() - i));
-		if (this.health == 0) {
-			this.selfDestroy(main);
+		setHealth(Math.max(0, getHealth() - i));
+		if (health == 0) {
+			selfDestroy(main);
 		}
 	}
 
 	@Override
 	public void move(Main main) {
-		this.setY(this.getY() + 7);
-		if (main.getHanSolo().getY() <= this.getY() + this.getSize()
-				&& main.getHanSolo().getX() < this.getX() + this.getSize()
-				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > this.getX()
-				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > this.getY()) {
+		setY(getY() + 7);
+		if (main.getHanSolo().getY() <= getY() + getSize() && main.getHanSolo().getX() < getX() + getSize()
+				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > getX()
+				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > getY()) {
 			main.remove(this);
 			((HanSolo) (main.getHanSolo())).setHealth(((HanSolo) (main.getHanSolo())).getHealth() + 100);
 			((HanSolo) (main.getHanSolo())).setMuni(((HanSolo) (main.getHanSolo())).getMuni() + 700);
@@ -107,18 +105,18 @@ public class Benefit implements IDrawable {
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		try {
-			this.finalize();
+			finalize();
 		} catch (final Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void setHealth(int h) {
-		this.health = Math.max(0, Math.min(h, this.maxhealth));
+		health = Math.max(0, Math.min(h, maxhealth));
 	}
 
 	public void setMaxhealth(int h) {
-		this.maxhealth = h;
+		maxhealth = h;
 	}
 
 	@Override
@@ -128,12 +126,12 @@ public class Benefit implements IDrawable {
 
 	@Override
 	public void setX(int x) {
-		this.X = x;
+		X = x;
 	}
 
 	@Override
 	public void setY(int y) {
-		this.Y = y;
+		Y = y;
 	}
 
 }

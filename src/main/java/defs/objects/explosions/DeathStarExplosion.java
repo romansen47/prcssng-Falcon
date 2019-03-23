@@ -12,8 +12,8 @@ public class DeathStarExplosion extends FinalExplosion {
 
 	public DeathStarExplosion(Main main, int x, int y) {
 		super(main, x, y);
-		this.setSize(150);
-		this.setR(new Random());
+		setSize(150);
+		setR(new Random());
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class DeathStarExplosion extends FinalExplosion {
 	}
 
 	public Random getR() {
-		return this.r;
+		return r;
 	}
 
 	public void setR(Random r) {

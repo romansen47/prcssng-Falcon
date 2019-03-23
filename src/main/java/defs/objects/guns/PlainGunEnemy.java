@@ -12,8 +12,8 @@ public class PlainGunEnemy extends PlainGun {
 
 	@Override
 	public void shoot(Main main) {
-		final Bullet blt = new Bullet(main, this.getFlyer().getX() + (int) (0.4 * this.getFlyer().getSize()),
-				this.getFlyer().getY() + this.getFlyer().getSize() + 20, (int) this.getFlyer().getSpeedX(), 15);
+		final Bullet blt = new Bullet(main, getFlyer().getX() + (int) (0.4 * getFlyer().getSize()),
+				getFlyer().getY() + getFlyer().getSize() + 20, (int) getFlyer().getSpeedX(), 15);
 		blt.setSpeedY(-blt.getSpeedY());
 		main.add(blt);
 		main.getPlainGunSound().trigger();

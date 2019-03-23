@@ -12,11 +12,10 @@ public class SimpleCombiGunBenefit extends Benefit {
 
 	@Override
 	public void move(Main main) {
-		this.setY(this.getY() + 4);
-		if (main.getHanSolo().getY() <= this.getY() + this.getSize()
-				&& main.getHanSolo().getX() < this.getX() + this.getSize()
-				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > this.getX()
-				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > this.getY()) {
+		setY(getY() + 4);
+		if (main.getHanSolo().getY() <= getY() + getSize() && main.getHanSolo().getX() < getX() + getSize()
+				&& main.getHanSolo().getX() + main.getHanSolo().getSize() > getX()
+				&& main.getHanSolo().getY() + main.getHanSolo().getSize() > getY()) {
 			main.remove(this);
 			((HanSolo) (main.getHanSolo())).addGun(new SimpleCombiGun((HanSolo) (main.getHanSolo())));
 		}

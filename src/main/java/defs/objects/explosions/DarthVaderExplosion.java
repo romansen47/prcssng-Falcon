@@ -32,12 +32,12 @@ public class DarthVaderExplosion extends DeathStarExplosion {
 			}
 		}
 
-		if ((main.getFrameCount() - this.getFrames()) < 30) {
-			main.shape(main.getExplosion(), ((int) (this.getX() - this.getSize() / 5.0)), this.getY() - 5,
-					(int) (0.1 * Math.sqrt(this.getFrames() / 30.0 * (main.getFrameCount() - this.getFrames()) / 30.0)
-							* this.getSize()),
-					(int) (0.1 * Math.sqrt(this.getFrames() / 30.0 * (main.getFrameCount() - this.getFrames()) / 30.0)
-							* this.getSize()));
+		if ((main.getFrameCount() - getFrames()) < 30) {
+			main.shape(main.getExplosion(), ((int) (getX() - getSize() / 5.0)), getY() - 5,
+					(int) (0.1 * Math.sqrt(getFrames() / 30.0 * (main.getFrameCount() - getFrames()) / 30.0)
+							* getSize()),
+					(int) (0.1 * Math.sqrt(getFrames() / 30.0 * (main.getFrameCount() - getFrames()) / 30.0)
+							* getSize()));
 		}
 		main.delay(2000);
 		main.remove(this);

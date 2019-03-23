@@ -11,32 +11,28 @@ public class Explosion implements IDrawable {
 
 	public Explosion(Main main, int x, int y) {
 		// image = main.getExplosion();
-		this.setFrames(main.getFrameCount());
-		this.setX(x);
-		this.setY(y);
+		setFrames(main.getFrameCount());
+		setX(x);
+		setY(y);
 		main.getExplosionSound().trigger();
 	}
 
 	@Override
 	public void draw(Main main) {
 		final double expSize = 10;
-		if ((main.getFrameCount() - this.getFrames()) < expSize) {
-			main.shape(main.getExplosion(), ((int) (this.getX() - this.getSize() / 5.0)), this.getY() - 5,
-					(int) (0.05
-							* Math.sqrt(
-									this.getFrames() / expSize * (main.getFrameCount() - this.getFrames()) / expSize)
-							* this.getSize()),
-					(int) (0.05
-							* Math.sqrt(
-									this.getFrames() / expSize * (main.getFrameCount() - this.getFrames()) / expSize)
-							* this.getSize()));
+		if ((main.getFrameCount() - getFrames()) < expSize) {
+			main.shape(main.getExplosion(), ((int) (getX() - getSize() / 5.0)), getY() - 5,
+					(int) (0.05 * Math.sqrt(getFrames() / expSize * (main.getFrameCount() - getFrames()) / expSize)
+							* getSize()),
+					(int) (0.05 * Math.sqrt(getFrames() / expSize * (main.getFrameCount() - getFrames()) / expSize)
+							* getSize()));
 		} else {
-			this.selfDestroy(main);
+			selfDestroy(main);
 		}
 	}
 
 	public int getFrames() {
-		return this.frames;
+		return frames;
 	}
 
 	@Override
@@ -46,12 +42,12 @@ public class Explosion implements IDrawable {
 
 	@Override
 	public int getX() {
-		return this.X;
+		return X;
 	}
 
 	@Override
 	public int getY() {
-		return this.Y;
+		return Y;
 	}
 
 	@Override
@@ -66,7 +62,7 @@ public class Explosion implements IDrawable {
 	public void selfDestroy(Main main) {
 		main.remove(this);
 		try {
-			this.finalize();
+			finalize();
 		} catch (final Throwable e) {
 			e.printStackTrace();
 		}
@@ -82,12 +78,12 @@ public class Explosion implements IDrawable {
 
 	@Override
 	public void setX(int x) {
-		this.X = x;
+		X = x;
 	}
 
 	@Override
 	public void setY(int y) {
-		this.Y = y;
+		Y = y;
 	}
 
 }

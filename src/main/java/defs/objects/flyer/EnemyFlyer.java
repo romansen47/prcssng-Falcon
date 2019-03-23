@@ -16,39 +16,38 @@ public class EnemyFlyer extends Flyer {
 
 	public EnemyFlyer(Main main) {
 		super(main, (int) (main.Width / 2.0 - ((new Random()).nextInt()) % (main.Width / 6)), 200);
-		this.setMass(300);
-		this.setIntelligence(1.0 + (new Random()).nextInt(50) / 100.0);
-		this.setSpeedY(((5 + (new Random()).nextInt() % 5) * main.Height / 1080));
-		this.AbsVel = this.getIntelligence();
-		this.setSize(60 * main.Height / 1080);
+		setMass(300);
+		setIntelligence(1.0 + (new Random()).nextInt(50) / 100.0);
+		setSpeedY(((5 + (new Random()).nextInt() % 5) * main.Height / 1080));
+		AbsVel = getIntelligence();
+		setSize(60 * main.Height / 1080);
 	}
 
 	public int getAcceleration() {
-		return this.acceleration;
+		return acceleration;
 	}
 
 	public int getDeltaX() {
-		return this.deltaX;
+		return deltaX;
 	}
 
 	public int[] getForce() {
-		return this.force;
+		return force;
 	}
 
 	public double getIntelligence() {
-		return this.intelligence;
+		return intelligence;
 	}
 
 	@Override
 	public void move() {
-		this.setPosition(
-				Functions.getInstance().getMathOperator().AdditionOfVectors(this.getPosition(), this.getVelocity()));
+		setPosition(Functions.getInstance().getMathOperator().AdditionOfVectors(getPosition(), getVelocity()));
 	}
 
 	@Override
 	public void move(Main main) {
 		if ((new Random()).nextInt(1000) > 950) {
-			this.shoot(main);
+			shoot(main);
 		}
 //		if(Math.abs(this.getPosition()[0]-((HanSolo)(main.getHanSolo())).getPosition()[0])>350) {
 //			this.getVelocity()[0]=this.getVelocity()[0]+
@@ -57,13 +56,13 @@ public class EnemyFlyer extends Flyer {
 //		}
 //		this.setVelocity(Functions.ScalarMultiplication(intelligence*0.01/AbsVel,
 //				Functions.AdditionOfVectors(Functions.ReversalOfVector(this.getPosition()),((HanSolo) (main.getHanSolo())).getPosition())));
-		this.setX(this.getX() + (int) (Math.pow(this.getIntelligence(), 1) * this.getSpeedX()));
-		this.setAcceleration(main.getHanSolo().getX() - this.getX());
+		setX(getX() + (int) (Math.pow(getIntelligence(), 1) * getSpeedX()));
+		setAcceleration(main.getHanSolo().getX() - getX());
 		final double[] vec1 = new double[2], vec2 = new double[2];
 		vec1[0] = main.getHanSolo().getX();
 		vec1[1] = main.Height / 8;
-		vec2[0] = this.getX();
-		vec2[1] = this.getY();
+		vec2[0] = getX();
+		vec2[1] = getY();
 		double[] frc = Functions.getInstance().getMathOperator().AdditionOfVectors(vec1,
 				Functions.getInstance().getMathOperator().ReversalOfVector(vec2));
 		final double tmpLength = Functions.getInstance().getMathOperator().MagnitudeOfVector(frc);
@@ -71,8 +70,8 @@ public class EnemyFlyer extends Flyer {
 			frc = Functions.getInstance().getMathOperator().ScalarMultiplication(0.1,
 					Functions.getInstance().getMathOperator().UnitVector(frc));
 		}
-		this.setVelocity(Functions.getInstance().getMathOperator().AdditionOfVectors(frc, this.getVelocity()));
-//		if(Math.abs(this.getPosition()[0]-((HanSolo)(main.getHanSolo())).getPosition()[0])>50) 
+		setVelocity(Functions.getInstance().getMathOperator().AdditionOfVectors(frc, getVelocity()));
+//		if(Math.abs(this.getPosition()[0]-((HanSolo)(main.getHanSolo())).getPosition()[0])>50)
 //		{
 //			if (getAcceleration()>0) {
 //				setSpeedX((getIntelligence()*Math.min(getSpeedX()+1,6*main.Height/1080)));
@@ -84,22 +83,22 @@ public class EnemyFlyer extends Flyer {
 //		getVelocity()[1]=Math.max((int)(3*intelligence),3);
 		this.move();
 		// Do we collide?
-		if (this.getY() + this.getSize() > main.getHanSolo().getY()
-				&& this.getX() < main.getHanSolo().getX() + main.getHanSolo().getSize()
-				&& this.getX() + this.getSize() > main.getHanSolo().getX()
-				&& this.getY() + this.getSize() < main.getHanSolo().getY() + main.getHanSolo().getSize()
-				&& this.getY() + this.getSize() < main.Height) {
+		if (getY() + getSize() > main.getHanSolo().getY()
+				&& getX() < main.getHanSolo().getX() + main.getHanSolo().getSize()
+				&& getX() + getSize() > main.getHanSolo().getX()
+				&& getY() + getSize() < main.getHanSolo().getY() + main.getHanSolo().getSize()
+				&& getY() + getSize() < main.Height) {
 			((HanSolo) main.getHanSolo()).addScore(50);
-			this.selfDestroy(main);
+			selfDestroy(main);
 			StatsCollector.getInstance().setEnemies(1 + StatsCollector.getInstance().getEnemies());
-			final Explosion expl = new Explosion(main, this.getX(), this.getY());
-			expl.setSize(this.getSize() * 2);
+			final Explosion expl = new Explosion(main, getX(), getY());
+			expl.setSize(getSize() * 2);
 			main.add(expl);
 			((HanSolo) main.getHanSolo()).setHealth(((HanSolo) main.getHanSolo()).getHealth() - 30);
 		}
-		if (this.getY() > main.Height) {
+		if (getY() > main.Height) {
 			((HanSolo) main.getHanSolo()).addScore(-25);
-			this.selfDestroy(main);
+			selfDestroy(main);
 		}
 	}
 
@@ -121,7 +120,7 @@ public class EnemyFlyer extends Flyer {
 
 	@Override
 	public void shoot(Main main) {
-		this.getGun().shoot(main);
+		getGun().shoot(main);
 		main.getPlainGunSound().trigger();
 	}
 

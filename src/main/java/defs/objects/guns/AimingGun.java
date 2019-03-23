@@ -8,13 +8,13 @@ public class AimingGun extends PlainGun {
 
 	public AimingGun(Flyer fly) {
 		super(fly);
-		this.setVerbrauch(50);
+		setVerbrauch(50);
 	}
 
 	@Override
 	public void shoot(Main main) {
-		main.add(new AimedBullet(main, this.getFlyer().getX() - (int) (0.05 * this.getFlyer().getSize()),
-				this.getFlyer().getY() + this.getFlyer().getSize() + 20));
+		main.add(new AimedBullet(main, getFlyer().getX() - (int) (0.05 * getFlyer().getSize()),
+				getFlyer().getY() + getFlyer().getSize() + 20));
 
 		main.getPlainGunSound().trigger();
 	}

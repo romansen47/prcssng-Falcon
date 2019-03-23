@@ -9,24 +9,23 @@ public class SimpleCombiGun extends PlainGun {
 
 	public SimpleCombiGun(Flyer fly) {
 		super(fly);
-		this.setVerbrauch(2 * this.getVerbrauch() + (new LaserGun(fly)).getVerbrauch());
+		setVerbrauch(2 * getVerbrauch() + (new LaserGun(fly)).getVerbrauch());
 	}
 
 	@Override
 	public void shoot(Main main) {
-		main.add(new Bullet(main, this.getFlyer().getX() - (int) (0.5 * this.getFlyer().getSize()),
-				this.getFlyer().getY() - 20, (int) this.getFlyer().getSpeedX(), 20));
-		main.add(new Bullet(main, this.getFlyer().getX() + (int) (0.5 * this.getFlyer().getSize()),
-				this.getFlyer().getY() - 20, (int) this.getFlyer().getSpeedX(), 20));
+		main.add(new Bullet(main, getFlyer().getX() - (int) (0.5 * getFlyer().getSize()), getFlyer().getY() - 20,
+				(int) getFlyer().getSpeedX(), 20));
+		main.add(new Bullet(main, getFlyer().getX() + (int) (0.5 * getFlyer().getSize()), getFlyer().getY() - 20,
+				(int) getFlyer().getSpeedX(), 20));
 		main.getPlainGunSound().trigger();
 		if (main.getFrameCount() % 4 == 0) {
-			main.addOnTop(new Laser(main, this.getFlyer().getX(), // +(int)(0.4*this.getFlyer().getSize()),
-					this.getFlyer().getY()));
+			main.addOnTop(new Laser(main, getFlyer().getX(), // +(int)(0.4*this.getFlyer().getSize()),
+					getFlyer().getY()));
 		} else if ((main.getFrameCount() + 2) % 4 == 0) {
-			main.addOnTop(new Laser(main, this.getFlyer().getX() + (int) (0.6 * this.getFlyer().getSize()),
-					this.getFlyer().getY()));
+			main.addOnTop(new Laser(main, getFlyer().getX() + (int) (0.6 * getFlyer().getSize()), getFlyer().getY()));
 		}
-		this.getFlyer().setMuni(this.getFlyer().getMuni() - this.getVerbrauch());
+		getFlyer().setMuni(getFlyer().getMuni() - getVerbrauch());
 	}
 
 }

@@ -6,7 +6,7 @@ public class SketchTemplate extends Gui {
 
 	/**
 	 * Replace main.SketchTemplate
-	 * 
+	 *
 	 * @param args Arguments delivered to PApplet
 	 */
 

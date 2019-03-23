@@ -8,11 +8,11 @@ public class LaserGun extends PlainGun {
 
 	public LaserGun(Flyer fly) {
 		super(fly);
-		this.setVerbrauch(6);
+		setVerbrauch(6);
 	}
 
 	@Override
 	public void shoot(Main main) {
-		main.addOnTop(new Laser(main, this.getFlyer().getX(), this.getFlyer().getY()));
+		main.addOnTop(new Laser(main, getFlyer().getX(), getFlyer().getY()));
 	}
 }
