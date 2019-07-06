@@ -59,7 +59,7 @@
 		</dependency>
 		<dependency>
 			<groupId>general</groupId>
-			<artifactId>definitions</artifactId>
+			<artifactId>math</artifactId>
 			<version>1.0.0-snapshot</version>
 			<type>jar</type>
 			<scope>compile</scope>
